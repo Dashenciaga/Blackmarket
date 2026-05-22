@@ -1,0 +1,2853 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLACKMARKET — Underground Tech Bazaar</title>
+<meta name="description" content="Монгол улсын дэлгэр gaming, render, оффис компьютерийн худалдаа. RTX 50, Ryzen, PS5, бэлэн сэтап.">
+<meta name="theme-color" content="#f5a524">
+<meta name="keywords" content="GPU, CPU, gaming, RTX 5080, Ryzen, PS5, монгол, компьютер">
+<meta property="og:title" content="BLACKMARKET — Underground Tech Bazaar">
+<meta property="og:description" content="RTX 50 серийн карт, PS5 Pro, бэлэн сэтап. Underground tech bazaar Mongolia.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="mn_MN">
+<meta property="og:site_name" content="BLACKMARKET">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BLACKMARKET — Underground Tech Bazaar">
+<meta name="twitter:description" content="RTX 50 серийн карт, PS5 Pro, бэлэн сэтап.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23f5a524'/%3E%3Ctext x='32' y='44' font-family='JetBrains Mono,monospace' font-size='28' font-weight='700' fill='%23000' text-anchor='middle'%3EBM%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23f5a524'/%3E%3Ctext x='32' y='44' font-family='JetBrains Mono,monospace' font-size='28' font-weight='700' fill='%23000' text-anchor='middle'%3EBM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+// Theme init — FOUC-ийг таслан зогсооно
+(function(){try{
+  var t = localStorage.getItem('blackmarket_theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', t);
+}catch(e){}})();
+</script>
+<style>
+/* ========== RESET & VARS ========== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#181a20;
+  --bg-2:#1f222a;
+  --bg-3:#272a35;
+  --card:#1c1f27;
+  --card-2:#252832;
+  --line:#2a2d38;
+  --line-2:#363a47;
+  --text:#e6e8ee;
+  --muted:#7a7f8e;
+  --muted-2:#9ba1b0;
+  --primary:#f5a524;
+  --primary-d:#d68a14;
+  --accent:#e54848;
+  --gold:#ffc857;
+  --warn:#ff9500;
+  --glow:0 0 24px rgba(245,165,36,.3);
+  --glow-r:0 0 24px rgba(229,72,72,.3);
+  --container:1340px;
+  --header-bg:rgba(5,5,5,.9);
+  --img-bg:linear-gradient(135deg,#1f222a,#272a35);
+  --hero-bg:linear-gradient(135deg,#2a2620 0%,#181a20 50%,#2a1f1f 100%);
+  --hero-c1:linear-gradient(135deg,#2a2620,#181a20);
+  --hero-c2:linear-gradient(135deg,#2a2420,#181a20);
+  --deal-bg:linear-gradient(135deg,rgba(229,72,72,.1),rgba(0,0,0,0)),linear-gradient(135deg,#2a1f1f,#181a20);
+  --overlay-bg:rgba(5,5,5,.8);
+  --hero-ghost:rgba(255,255,255,.02);
+}
+
+/* ========== LIGHT THEME ========== */
+:root[data-theme="light"]{
+  --bg:#f6f7fb;
+  --bg-2:#ffffff;
+  --bg-3:#eef0f6;
+  --card:#ffffff;
+  --card-2:#f6f7fb;
+  --line:#e4e7ef;
+  --line-2:#cbcfdb;
+  --text:#1a1d26;
+  --muted:#6b7080;
+  --muted-2:#3f4350;
+  --gold:#c08a0a;
+  --glow:0 0 24px rgba(245,165,36,.18);
+  --glow-r:0 0 24px rgba(229,72,72,.15);
+  --header-bg:rgba(255,255,255,.92);
+  --img-bg:linear-gradient(135deg,#f6f7fb,#eef0f6);
+  --hero-bg:linear-gradient(135deg,#fff4dc 0%,#fafbff 50%,#ffe5e5 100%);
+  --hero-c1:linear-gradient(135deg,#fff4dc,#fafbff);
+  --hero-c2:linear-gradient(135deg,#ffe5e5,#fafbff);
+  --deal-bg:linear-gradient(135deg,rgba(229,72,72,.06),rgba(0,0,0,0)),linear-gradient(135deg,#ffefef,#fff8f0);
+  --overlay-bg:rgba(255,255,255,.9);
+  --hero-ghost:rgba(0,0,0,.04);
+}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:'Manrope',system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  font-size:14px;line-height:1.5;
+  min-height:100vh;
+  overflow-x:hidden;
+  background-image:
+    radial-gradient(ellipse at top,rgba(245,165,36,.04),transparent 50%),
+    radial-gradient(ellipse at bottom right,rgba(229,72,72,.025),transparent 50%);
+  background-attachment:fixed;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none;transition:color .2s}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,select,textarea{font-family:inherit;outline:none;background:var(--bg-2);border:1px solid var(--line-2);color:var(--text);border-radius:6px;padding:10px 14px}
+input:focus,select:focus,textarea:focus{border-color:var(--primary)}
+h1,h2,h3,h4,h5{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:1px;line-height:1.05;text-transform:uppercase}
+.mono{font-family:'JetBrains Mono',monospace}
+.container{max-width:var(--container);margin:0 auto;padding:0 20px}
+
+/* Subtle texture for "underground" feel - removed scanlines, was too harsh */
+
+/* ========== TOP STRIP ========== */
+.topstrip{
+  background:var(--primary);color:#000;
+  font-size:11.5px;font-weight:600;letter-spacing:1px;
+  text-transform:uppercase;overflow:hidden;
+  border-bottom:1px solid #000;
+}
+.ticker{
+  display:flex;animation:scroll 30s linear infinite;
+  width:max-content;padding:8px 0;
+}
+.ticker span{padding:0 28px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.ticker span::before{content:"▲";font-size:9px}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ========== HEADER ========== */
+.header{
+  background:var(--header-bg);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:100;
+}
+.header-inner{
+  display:grid;grid-template-columns:auto 1fr auto;
+  gap:32px;align-items:center;height:84px;
+}
+.logo{
+  display:flex;align-items:center;gap:10px;
+  font-family:'Bebas Neue',sans-serif;font-size:30px;
+  letter-spacing:2px;
+}
+.logo-mark{
+  width:42px;height:42px;display:grid;place-items:center;
+  background:var(--primary);color:#000;font-weight:700;
+  border-radius:4px;font-family:'JetBrains Mono';font-size:18px;
+  position:relative;
+}
+.logo-mark::after{
+  content:"";position:absolute;inset:-2px;border:1px solid var(--primary);
+  border-radius:6px;opacity:.5;animation:pulse 2s infinite;
+}
+@keyframes pulse{50%{opacity:.2}}
+.logo-text{display:flex;flex-direction:column;line-height:.9}
+.logo-text strong{font-size:24px;color:var(--text)}
+.logo-text small{
+  font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--primary);
+  letter-spacing:3px;text-transform:uppercase;margin-top:2px;
+}
+
+.searchbar{position:relative;max-width:620px;width:100%;justify-self:center}
+.searchbar input{
+  width:100%;height:48px;padding:0 100px 0 48px;
+  background:var(--bg-2);border:1px solid var(--line-2);border-radius:8px;
+  font-size:14px;
+}
+.searchbar input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(245,165,36,.1)}
+.search-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--muted)}
+.searchbar button{
+  position:absolute;right:6px;top:6px;height:36px;padding:0 18px;
+  background:var(--primary);color:#000;border-radius:6px;font-weight:700;font-size:12px;
+  letter-spacing:1px;text-transform:uppercase;
+}
+.searchbar button:hover{background:var(--primary-d)}
+
+.header-actions{display:flex;gap:8px;align-items:center}
+.icon-btn{
+  width:44px;height:44px;display:grid;place-items:center;
+  background:var(--bg-2);border:1px solid var(--line-2);border-radius:8px;
+  position:relative;transition:all .2s;
+}
+.icon-btn:hover{border-color:var(--primary);color:var(--primary);transform:translateY(-2px)}
+.icon-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2}
+.theme-icon-sun{display:none}
+.theme-icon-moon{display:block}
+[data-theme="light"] .theme-icon-sun{display:block}
+[data-theme="light"] .theme-icon-moon{display:none}
+.badge{
+  position:absolute;top:-6px;right:-6px;min-width:20px;height:20px;padding:0 5px;
+  background:var(--accent);color:#fff;font-size:10px;font-weight:700;
+  border-radius:10px;display:grid;place-items:center;border:2px solid var(--bg);
+  font-family:'JetBrains Mono';
+}
+.cart-btn{
+  display:flex;align-items:center;gap:12px;padding:0 18px;height:44px;
+  background:var(--primary);color:#000;border-radius:8px;font-weight:700;
+  letter-spacing:.5px;text-transform:uppercase;font-size:13px;
+}
+.cart-btn:hover{background:var(--primary-d);color:#000}
+.cart-btn svg{width:18px;height:18px;stroke:#000;fill:none;stroke-width:2.5}
+.cart-btn .cart-total{font-family:'JetBrains Mono';font-size:12px;opacity:.7}
+
+/* ========== NAV ========== */
+.nav{background:var(--bg-2);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;height:48px}
+.nav-menu{display:flex;list-style:none;flex:1}
+.nav-menu a{
+  display:flex;align-items:center;height:48px;padding:0 22px;
+  font-weight:600;font-size:12.5px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--muted-2);border-bottom:2px solid transparent;
+  transition:all .15s;
+}
+.nav-menu a:hover,.nav-menu a.active{color:var(--primary);border-color:var(--primary)}
+.nav-menu li:first-child a{
+  background:var(--primary);color:#000;height:48px;
+  letter-spacing:1px;font-weight:700;
+}
+.nav-menu li:first-child a:hover{background:var(--primary-d);color:#000;border-bottom-color:transparent}
+.nav-hot{
+  display:flex;align-items:center;gap:8px;
+  color:var(--accent);font-weight:700;font-size:12px;
+  letter-spacing:1px;text-transform:uppercase;
+}
+.nav-hot::before{content:"●";animation:blink 1.4s infinite}
+@keyframes blink{50%{opacity:.3}}
+
+.mobile-toggle{display:none}
+
+/* ========== MAIN ========== */
+main{min-height:60vh}
+
+/* ========== HERO ========== */
+.hero{padding:32px 0}
+.hero-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:16px}
+.hero-main{
+  position:relative;height:480px;border-radius:12px;overflow:hidden;
+  background:var(--hero-bg);
+  border:1px solid var(--line-2);padding:60px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.hero-main::before{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 75% 30%,rgba(245,165,36,.15),transparent 50%),
+    radial-gradient(circle at 25% 75%,rgba(229,72,72,.08),transparent 50%);
+}
+.hero-bg-text{
+  position:absolute;right:-30px;bottom:-100px;
+  font-family:'Bebas Neue';font-size:340px;line-height:.8;
+  color:var(--hero-ghost);letter-spacing:-10px;
+  pointer-events:none;
+}
+.hero-content{position:relative;z-index:2;max-width:560px}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'JetBrains Mono';font-size:11px;letter-spacing:2px;
+  color:var(--primary);text-transform:uppercase;margin-bottom:24px;
+  padding:6px 12px;border:1px solid rgba(245,165,36,.25);border-radius:4px;
+  background:rgba(245,165,36,.05);
+}
+.hero-tag::before{content:"//"}
+.hero h1{
+  font-size:96px;line-height:.92;margin-bottom:20px;letter-spacing:-1px;
+}
+.hero h1 .accent{color:var(--primary)}
+.hero h1 .strike{
+  position:relative;color:var(--muted);
+}
+.hero h1 .strike::after{
+  content:"";position:absolute;left:-5%;right:-5%;top:50%;height:6px;
+  background:var(--accent);transform:rotate(-3deg);
+}
+.hero p{color:var(--muted-2);font-size:16px;max-width:440px;margin-bottom:32px;line-height:1.6}
+.hero-cta-row{display:flex;gap:14px;align-items:center}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 26px;border-radius:8px;font-weight:700;font-size:13px;
+  letter-spacing:1px;text-transform:uppercase;transition:all .2s;
+  cursor:pointer;border:1px solid transparent;
+}
+.btn-primary{background:var(--primary);color:#000}
+.btn-primary:hover{background:var(--primary-d);transform:translateY(-2px);box-shadow:var(--glow);color:#000}
+.btn-outline{border-color:var(--line-2);color:var(--text)}
+.btn-outline:hover{border-color:var(--primary);color:var(--primary)}
+.btn-danger{background:var(--accent);color:#fff}
+.btn-danger:hover{background:#c93a3a;transform:translateY(-2px);color:#fff}
+.btn-ghost{color:var(--muted-2);padding:10px 14px}
+.btn-ghost:hover{color:var(--primary)}
+.btn svg{width:14px;height:14px}
+
+.hero-side{display:flex;flex-direction:column;gap:16px}
+.hero-card{
+  flex:1;position:relative;border-radius:12px;overflow:hidden;padding:28px;
+  border:1px solid var(--line-2);
+  display:flex;flex-direction:column;justify-content:space-between;
+  transition:all .3s;cursor:pointer;
+  min-height:230px;
+}
+.hero-card:hover{border-color:var(--primary);transform:translateY(-4px)}
+.hero-card.c1{background:var(--hero-c1)}
+.hero-card.c2{background:var(--hero-c2)}
+.hero-card .tag{
+  font-family:'JetBrains Mono';font-size:10px;letter-spacing:2px;
+  color:var(--primary);text-transform:uppercase;
+}
+.hero-card.c2 .tag{color:var(--accent)}
+.hero-card h3{font-size:38px;margin:8px 0;line-height:.95}
+.hero-card .price{font-family:'JetBrains Mono';color:var(--text);font-size:13px}
+.hero-card .price strong{color:var(--primary);font-size:18px;font-weight:700}
+.hero-card.c2 .price strong{color:var(--accent)}
+.hero-card .arrow{
+  position:absolute;bottom:24px;right:24px;width:40px;height:40px;
+  border-radius:50%;border:1px solid var(--line-2);
+  display:grid;place-items:center;transition:all .2s;
+}
+.hero-card:hover .arrow{background:var(--primary);border-color:var(--primary);color:#000;transform:rotate(-45deg)}
+
+/* ========== STATS BAR ========== */
+.stats{
+  padding:20px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  background:var(--bg-2);
+}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+.stat{display:flex;gap:14px;align-items:center}
+.stat-icon{
+  width:48px;height:48px;display:grid;place-items:center;
+  background:rgba(245,165,36,.08);border:1px solid rgba(245,165,36,.2);
+  border-radius:8px;color:var(--primary);font-size:22px;
+}
+.stat-text strong{display:block;font-size:14px;font-weight:700;margin-bottom:2px}
+.stat-text span{font-size:12px;color:var(--muted-2)}
+
+/* ========== SECTION HEADS ========== */
+.section{padding:56px 0}
+.section-head{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:32px;flex-wrap:wrap;gap:12px;
+}
+.section-title{
+  font-size:48px;display:flex;align-items:baseline;gap:14px;
+  letter-spacing:1px;
+}
+.section-title .num{
+  font-family:'JetBrains Mono';font-size:14px;color:var(--primary);
+  letter-spacing:2px;
+}
+.section-title .sub{
+  font-family:'JetBrains Mono';font-size:11px;color:var(--muted);
+  letter-spacing:2px;font-weight:400;text-transform:uppercase;
+}
+.section-link{
+  font-family:'JetBrains Mono';font-size:12px;letter-spacing:2px;
+  text-transform:uppercase;color:var(--muted-2);
+  display:flex;align-items:center;gap:8px;transition:color .2s;
+}
+.section-link:hover{color:var(--primary)}
+.section-link::after{content:"→";transition:transform .2s}
+.section-link:hover::after{transform:translateX(4px)}
+
+/* ========== CATEGORIES ========== */
+.cat-grid{display:grid;grid-template-columns:repeat(9,1fr);gap:12px}
+.cat-item{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  padding:22px 12px;background:var(--card);border:1px solid var(--line);
+  border-radius:10px;transition:all .25s;position:relative;overflow:hidden;
+  cursor:pointer;
+}
+.cat-item::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--primary);transform:scaleX(0);transform-origin:left;
+  transition:transform .3s;
+}
+.cat-item:hover{transform:translateY(-4px);border-color:var(--primary)}
+.cat-item:hover::before{transform:scaleX(1)}
+.cat-icon{
+  width:56px;height:56px;display:grid;place-items:center;
+  background:var(--bg-2);border:1px solid var(--line-2);border-radius:10px;
+  font-size:26px;transition:all .3s;
+}
+.cat-item:hover .cat-icon{background:rgba(245,165,36,.1);border-color:var(--primary)}
+.cat-item span{
+  font-family:'JetBrains Mono';font-size:11px;font-weight:500;
+  letter-spacing:1px;text-transform:uppercase;
+}
+
+/* ========== PRODUCT GRID ========== */
+.tabs{
+  display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:28px;
+  overflow-x:auto;
+}
+.tab{
+  padding:14px 22px;font-weight:700;font-size:12px;color:var(--muted-2);
+  border-bottom:2px solid transparent;letter-spacing:2px;text-transform:uppercase;
+  white-space:nowrap;font-family:'JetBrains Mono';
+}
+.tab.active{color:var(--primary);border-color:var(--primary)}
+.tab:hover{color:var(--text)}
+
+.product-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.product-grid.cols-4{grid-template-columns:repeat(4,1fr)}
+
+.product{
+  background:var(--card);border:1px solid var(--line);border-radius:10px;
+  overflow:hidden;transition:all .25s;position:relative;
+  display:flex;flex-direction:column;
+}
+.product:hover{
+  transform:translateY(-4px);border-color:var(--primary);
+  box-shadow:0 10px 40px rgba(245,165,36,.08);
+}
+.product-img{
+  position:relative;aspect-ratio:1;
+  background:var(--img-bg);
+  display:grid;place-items:center;font-size:84px;overflow:hidden;
+  cursor:pointer;
+}
+.product-img::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at center,rgba(245,165,36,.04),transparent 60%);
+  opacity:0;transition:opacity .3s;
+}
+.product:hover .product-img::after{opacity:1}
+.product-badge{
+  position:absolute;top:10px;left:10px;z-index:2;
+  padding:4px 10px;border-radius:4px;font-size:10px;font-weight:700;
+  font-family:'JetBrains Mono';letter-spacing:1px;text-transform:uppercase;
+}
+.product-badge.discount{background:var(--accent);color:#fff}
+.product-badge.new{background:var(--primary);color:#000}
+.product-badge.hot{background:var(--warn);color:#000}
+.product-actions{
+  position:absolute;top:10px;right:10px;z-index:2;
+  display:flex;flex-direction:column;gap:6px;
+  opacity:0;transform:translateX(10px);transition:all .25s;
+}
+.product:hover .product-actions{opacity:1;transform:translateX(0)}
+.product-actions button{
+  width:34px;height:34px;border-radius:6px;
+  background:var(--overlay-bg);backdrop-filter:blur(8px);
+  display:grid;place-items:center;border:1px solid var(--line-2);
+  transition:all .2s;
+}
+.product-actions button:hover{background:var(--primary);border-color:var(--primary);color:#000}
+.product-actions button.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.product-actions svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+
+.product-info{padding:14px;flex:1;display:flex;flex-direction:column}
+.product-cat{
+  font-family:'JetBrains Mono';font-size:10px;color:var(--primary);
+  font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;
+}
+.product-info h4{
+  font-family:'Manrope';font-size:13px;font-weight:600;letter-spacing:0;
+  line-height:1.4;margin-bottom:10px;min-height:36px;
+  text-transform:none;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  cursor:pointer;
+}
+.product-info h4:hover{color:var(--primary)}
+.product-rating{display:flex;align-items:center;gap:6px;margin-bottom:10px;font-size:11px;color:var(--muted)}
+.stars{color:var(--gold);letter-spacing:1px;font-size:12px}
+.product-price{display:flex;align-items:baseline;gap:8px;margin-top:auto}
+.product-price .now{
+  font-family:'JetBrains Mono';font-size:18px;font-weight:700;color:var(--primary);
+}
+.product-price .was{font-size:12px;color:var(--muted);text-decoration:line-through}
+.add-cart{
+  margin-top:12px;width:100%;height:38px;
+  background:var(--bg-2);border:1px solid var(--line-2);border-radius:6px;
+  color:var(--text);font-weight:700;font-size:11px;letter-spacing:1.5px;
+  text-transform:uppercase;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:all .2s;
+}
+.add-cart:hover{background:var(--primary);border-color:var(--primary);color:#000}
+.add-cart svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.5}
+
+/* ========== DEAL SECTION ========== */
+.deal-banner{
+  background:var(--deal-bg);
+  border:1px solid rgba(229,72,72,.25);border-radius:14px;padding:48px;
+  display:grid;grid-template-columns:1fr 1.4fr;gap:48px;align-items:center;
+  position:relative;overflow:hidden;
+}
+.deal-banner::before{
+  content:"";position:absolute;top:-50%;right:-10%;width:500px;height:500px;
+  border-radius:50%;background:radial-gradient(circle,rgba(229,72,72,.15),transparent 70%);
+}
+.deal-info{position:relative;z-index:1}
+.deal-info .eyebrow{
+  font-family:'JetBrains Mono';color:var(--accent);font-size:11px;letter-spacing:3px;
+  text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px;
+}
+.deal-info .eyebrow::before{content:"⚡"}
+.deal-info h2{font-size:64px;line-height:.95;margin-bottom:18px}
+.deal-info h2 span{color:var(--accent)}
+.deal-info p{color:var(--muted-2);margin-bottom:24px;max-width:380px}
+.countdown{display:flex;gap:12px;margin-bottom:28px}
+.count-box{
+  text-align:center;background:var(--overlay-bg);
+  border:1px solid var(--line-2);border-radius:8px;
+  padding:14px 18px;min-width:72px;backdrop-filter:blur(4px);
+}
+.count-num{
+  font-family:'JetBrains Mono';font-size:30px;font-weight:700;color:var(--accent);
+  display:block;line-height:1;
+}
+.count-label{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:2px;margin-top:6px;display:block;font-family:'JetBrains Mono'}
+.deal-products{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;position:relative;z-index:1}
+
+/* ========== BREADCRUMB ========== */
+.breadcrumb{
+  padding:18px 0;font-family:'JetBrains Mono';font-size:11px;
+  color:var(--muted);letter-spacing:1px;text-transform:uppercase;
+  border-bottom:1px solid var(--line);
+}
+.breadcrumb a:hover{color:var(--primary)}
+.breadcrumb .sep{margin:0 10px;color:var(--muted)}
+
+/* ========== SHOP PAGE ========== */
+.shop-layout{display:grid;grid-template-columns:260px 1fr;gap:28px;padding:32px 0}
+.filter-sidebar{
+  background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:24px;height:fit-content;position:sticky;top:140px;
+}
+.filter-block{margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--line)}
+.filter-block:last-child{border:0;padding-bottom:0;margin-bottom:0}
+.filter-block h5{
+  font-size:14px;letter-spacing:2px;margin-bottom:14px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.filter-block h5::after{
+  content:"+";color:var(--muted);font-family:'JetBrains Mono';font-size:14px;
+}
+.filter-list{list-style:none;display:flex;flex-direction:column;gap:8px;font-size:13px}
+.filter-list label{
+  display:flex;align-items:center;gap:8px;cursor:pointer;
+  padding:6px 8px;border-radius:4px;transition:background .15s;
+}
+.filter-list label:hover{background:var(--bg-2)}
+.filter-list input[type=checkbox],.filter-list input[type=radio]{
+  accent-color:var(--primary);width:14px;height:14px;
+}
+.filter-list .count{margin-left:auto;color:var(--muted);font-family:'JetBrains Mono';font-size:11px}
+.price-range{display:flex;gap:8px;margin-top:10px}
+.price-range input{width:100%;font-size:12px;padding:8px;font-family:'JetBrains Mono'}
+.price-slider{width:100%;margin:14px 0 8px;accent-color:var(--primary)}
+
+.shop-main{display:flex;flex-direction:column;gap:18px}
+.shop-toolbar{
+  display:flex;justify-content:space-between;align-items:center;
+  background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:14px 20px;flex-wrap:wrap;gap:12px;
+}
+.shop-toolbar .info{
+  font-size:13px;color:var(--muted-2);font-family:'JetBrains Mono';letter-spacing:1px;
+}
+.shop-toolbar .info strong{color:var(--primary)}
+.shop-toolbar .controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.shop-toolbar select{font-size:12px;height:36px;padding:0 32px 0 12px;cursor:pointer}
+
+.pagination{
+  display:flex;gap:6px;justify-content:center;margin-top:24px;
+}
+.pagination button{
+  width:38px;height:38px;border-radius:6px;font-family:'JetBrains Mono';font-size:13px;
+  background:var(--card);border:1px solid var(--line-2);
+}
+.pagination button.active{background:var(--primary);color:#000;border-color:var(--primary)}
+.pagination button:hover:not(.active){border-color:var(--primary);color:var(--primary)}
+
+/* ========== PRODUCT DETAIL ========== */
+.product-detail{padding:32px 0}
+.pd-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:48px}
+.pd-gallery{position:sticky;top:140px;height:fit-content}
+.pd-main-img{
+  aspect-ratio:1;background:var(--img-bg);
+  border:1px solid var(--line-2);border-radius:14px;
+  display:grid;place-items:center;font-size:200px;margin-bottom:14px;
+  position:relative;overflow:hidden;
+}
+.pd-main-img::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at center,rgba(245,165,36,.06),transparent 60%);
+}
+.pd-thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.pd-thumb{
+  aspect-ratio:1;background:var(--card);border:1px solid var(--line);
+  border-radius:8px;display:grid;place-items:center;font-size:40px;cursor:pointer;
+  transition:border-color .2s;
+}
+.pd-thumb.active,.pd-thumb:hover{border-color:var(--primary)}
+
+.pd-info .pd-cat{
+  font-family:'JetBrains Mono';font-size:11px;color:var(--primary);
+  letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;
+}
+.pd-info h1{font-size:46px;line-height:1;margin-bottom:14px;letter-spacing:0}
+.pd-meta{display:flex;gap:18px;align-items:center;margin-bottom:24px;color:var(--muted)}
+.pd-meta .pd-rating{display:flex;align-items:center;gap:8px;font-size:13px}
+.pd-meta .pd-sku{font-family:'JetBrains Mono';font-size:11px;letter-spacing:1px;text-transform:uppercase}
+.pd-price-row{
+  display:flex;align-items:baseline;gap:14px;margin-bottom:24px;
+  padding:24px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.pd-price{font-family:'JetBrains Mono';font-size:42px;font-weight:700;color:var(--primary);line-height:1}
+.pd-price-was{font-size:18px;color:var(--muted);text-decoration:line-through;font-family:'JetBrains Mono'}
+.pd-save{
+  padding:6px 10px;background:var(--accent);color:#fff;border-radius:4px;
+  font-family:'JetBrains Mono';font-size:11px;font-weight:700;letter-spacing:1px;
+}
+
+.pd-desc{color:var(--muted-2);margin-bottom:24px;line-height:1.7}
+.pd-specs{
+  background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:20px;margin-bottom:24px;
+}
+.pd-specs h4{font-size:14px;letter-spacing:2px;margin-bottom:14px}
+.pd-specs-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:13px}
+.pd-specs-list li{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--line)}
+.pd-specs-list li span:first-child{color:var(--muted)}
+.pd-specs-list li span:last-child{color:var(--text);font-weight:600;font-family:'JetBrains Mono';font-size:12px}
+
+.pd-stock{
+  display:flex;align-items:center;gap:8px;font-size:13px;
+  color:var(--primary);font-family:'JetBrains Mono';letter-spacing:1px;
+  margin-bottom:24px;text-transform:uppercase;
+}
+.pd-stock::before{content:"●";animation:blink 1.4s infinite}
+
+.pd-actions{display:flex;gap:12px;align-items:center;margin-bottom:24px}
+.qty-control{
+  display:flex;align-items:center;background:var(--bg-2);
+  border:1px solid var(--line-2);border-radius:8px;overflow:hidden;
+}
+.qty-control button{width:42px;height:48px;font-size:18px;font-weight:700}
+.qty-control button:hover{background:var(--bg-3);color:var(--primary)}
+.qty-control input{
+  width:54px;height:48px;text-align:center;border:0;background:transparent;
+  font-family:'JetBrains Mono';font-weight:700;padding:0;
+}
+
+.pd-actions .btn-primary{flex:1;height:48px;font-size:13px}
+.pd-extra{display:flex;gap:10px;margin-bottom:24px}
+.pd-extra button{
+  flex:1;padding:12px;background:var(--bg-2);border:1px solid var(--line-2);
+  border-radius:8px;font-size:12px;letter-spacing:1px;text-transform:uppercase;font-weight:600;
+  display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s;
+}
+.pd-extra button:hover{border-color:var(--primary);color:var(--primary)}
+.pd-extra button.active{border-color:var(--accent);color:var(--accent)}
+.pd-extra svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+
+.pd-info-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;
+  padding-top:18px;border-top:1px solid var(--line);
+}
+.pd-info-row{display:flex;gap:12px;font-size:12px;color:var(--muted-2)}
+.pd-info-row strong{color:var(--text);display:block;margin-bottom:2px;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-family:'JetBrains Mono'}
+
+/* ========== CART ========== */
+.cart-page{padding:32px 0 64px}
+.cart-grid{display:grid;grid-template-columns:1fr 380px;gap:28px}
+.cart-items{
+  background:var(--card);border:1px solid var(--line);border-radius:10px;
+  overflow:hidden;
+}
+.cart-header{
+  display:grid;grid-template-columns:80px 1fr 140px 130px 140px 40px;
+  padding:18px 24px;border-bottom:1px solid var(--line);
+  font-family:'JetBrains Mono';font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);
+  align-items:center;
+}
+.cart-item{
+  display:grid;grid-template-columns:80px 1fr 140px 130px 140px 40px;
+  padding:20px 24px;border-bottom:1px solid var(--line);align-items:center;
+  gap:12px;
+}
+.cart-item:last-child{border:0}
+.cart-item-img{
+  width:80px;height:80px;border-radius:8px;
+  background:var(--img-bg);
+  display:grid;place-items:center;font-size:36px;
+  border:1px solid var(--line);
+}
+.cart-item-info h4{
+  font-family:'Manrope';font-size:14px;font-weight:600;letter-spacing:0;
+  text-transform:none;margin-bottom:4px;line-height:1.3;
+}
+.cart-item-info .cat{
+  font-family:'JetBrains Mono';font-size:10px;color:var(--primary);
+  letter-spacing:1px;text-transform:uppercase;
+}
+.cart-item-price{font-family:'JetBrains Mono';font-size:14px;font-weight:600}
+.cart-item .qty-control{height:38px}
+.cart-item .qty-control button{width:32px;height:36px}
+.cart-item .qty-control input{width:40px;height:36px}
+.cart-item-total{font-family:'JetBrains Mono';font-size:16px;font-weight:700;color:var(--primary)}
+.cart-remove{
+  width:36px;height:36px;border-radius:6px;background:var(--bg-2);
+  border:1px solid var(--line-2);display:grid;place-items:center;
+  color:var(--muted);transition:all .2s;
+}
+.cart-remove:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.cart-remove svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+
+.cart-summary{
+  background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:24px;height:fit-content;position:sticky;top:140px;
+}
+.cart-summary h3{font-size:24px;margin-bottom:20px;letter-spacing:2px}
+.summary-row{
+  display:flex;justify-content:space-between;padding:10px 0;
+  font-size:13px;color:var(--muted-2);
+}
+.summary-row strong{color:var(--text);font-family:'JetBrains Mono'}
+.summary-row.total{
+  border-top:1px solid var(--line);margin-top:10px;padding-top:18px;
+  font-size:16px;color:var(--text);
+}
+.summary-row.total strong{font-family:'JetBrains Mono';font-size:24px;color:var(--primary)}
+.coupon{
+  display:flex;gap:8px;margin:18px 0;
+}
+.coupon input{flex:1;font-size:12px;font-family:'JetBrains Mono';text-transform:uppercase}
+.coupon button{padding:0 14px;background:var(--bg-2);border:1px solid var(--line-2);border-radius:6px;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:700}
+.coupon button:hover{border-color:var(--primary);color:var(--primary)}
+
+.cart-empty{
+  text-align:center;padding:80px 20px;
+  background:var(--card);border:1px solid var(--line);border-radius:10px;
+}
+.cart-empty .icon{font-size:80px;margin-bottom:20px;opacity:.3}
+.cart-empty h2{font-size:36px;margin-bottom:10px}
+.cart-empty p{color:var(--muted);margin-bottom:24px}
+
+/* ========== CHECKOUT ========== */
+.checkout-page{padding:32px 0 64px}
+.checkout-grid{display:grid;grid-template-columns:1fr 400px;gap:28px}
+.checkout-section{
+  background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:28px;margin-bottom:18px;
+}
+.checkout-section h3{
+  font-size:22px;margin-bottom:20px;display:flex;align-items:center;gap:14px;
+  letter-spacing:2px;
+}
+.checkout-section h3 .step-num{
+  width:32px;height:32px;background:var(--primary);color:#000;border-radius:50%;
+  display:grid;place-items:center;font-family:'JetBrains Mono';font-size:14px;font-weight:700;
+}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-grid.full{grid-template-columns:1fr}
+.form-field{display:flex;flex-direction:column;gap:6px}
+.form-field label{
+  font-family:'JetBrains Mono';font-size:10px;letter-spacing:2px;
+  text-transform:uppercase;color:var(--muted-2);
+}
+.form-field input,.form-field select,.form-field textarea{height:46px}
+.form-field textarea{height:auto;min-height:90px;padding:12px 14px;resize:vertical}
+.form-field.error input{border-color:var(--accent)}
+.form-field .err{font-size:11px;color:var(--accent);font-family:'JetBrains Mono'}
+
+.payment-options{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px}
+.pay-option{
+  padding:16px;background:var(--bg-2);border:1px solid var(--line-2);
+  border-radius:8px;cursor:pointer;text-align:center;transition:all .2s;
+}
+.pay-option:hover{border-color:var(--primary)}
+.pay-option.active{border-color:var(--primary);background:rgba(245,165,36,.05)}
+.pay-option .pay-icon{font-size:30px;margin-bottom:8px}
+.pay-option div:nth-child(2){font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px}
+.pay-option small{display:block;font-size:11px;color:var(--muted);margin-top:4px;font-family:'JetBrains Mono'}
+
+/* ========== SUCCESS ========== */
+.success-page{
+  padding:80px 0;display:grid;place-items:center;text-align:center;min-height:60vh;
+}
+.success-icon{
+  width:120px;height:120px;border-radius:50%;background:var(--primary);
+  color:#000;display:grid;place-items:center;font-size:60px;margin:0 auto 32px;
+  animation:pop .4s ease-out;
+  box-shadow:var(--glow);
+}
+@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
+.success-page h1{font-size:64px;margin-bottom:14px}
+.success-page p{color:var(--muted-2);margin-bottom:32px;max-width:500px;margin-left:auto;margin-right:auto;font-size:16px}
+.order-card{
+  background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:24px;max-width:520px;margin:0 auto 32px;text-align:left;
+}
+.order-card h4{font-size:16px;margin-bottom:14px;letter-spacing:2px}
+.order-card .row{
+  display:flex;justify-content:space-between;padding:8px 0;
+  font-size:13px;border-bottom:1px solid var(--line);
+}
+.order-card .row:last-child{border:0;color:var(--primary);font-weight:700;font-family:'JetBrains Mono'}
+.order-card .row strong{font-family:'JetBrains Mono'}
+
+/* ========== WISHLIST ========== */
+.wishlist-page{padding:32px 0 64px}
+
+/* ========== EMPTY/LOADING ========== */
+.empty-state{
+  text-align:center;padding:80px 20px;
+  background:var(--card);border:1px solid var(--line);border-radius:10px;
+}
+.empty-state .icon{font-size:80px;margin-bottom:20px;opacity:.3}
+.empty-state h2{font-size:32px;margin-bottom:10px}
+.empty-state p{color:var(--muted);margin-bottom:24px}
+
+/* ========== TOAST ========== */
+.toast-container{
+  position:fixed;bottom:24px;right:24px;z-index:9999;
+  display:flex;flex-direction:column;gap:10px;
+}
+.toast{
+  background:var(--card);border:1px solid var(--primary);
+  border-left-width:4px;padding:14px 20px;border-radius:8px;
+  font-size:13px;font-weight:600;
+  display:flex;align-items:center;gap:12px;min-width:260px;
+  animation:slideIn .3s ease-out;
+  box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+.toast.error{border-color:var(--accent)}
+.toast.warn{border-color:var(--warn)}
+.toast .toast-icon{font-size:18px}
+.toast.removing{animation:slideOut .3s ease-in forwards}
+@keyframes slideIn{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes slideOut{to{transform:translateX(120%);opacity:0}}
+
+/* ========== FOOTER ========== */
+.footer{background:var(--bg-2);padding:56px 0 0;border-top:1px solid var(--line);margin-top:64px}
+.foot-grid{
+  display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1.2fr;gap:40px;
+  padding-bottom:40px;
+}
+.foot-about p{color:var(--muted-2);font-size:13px;margin:16px 0 20px;max-width:280px;line-height:1.7}
+.foot-social{display:flex;gap:10px}
+.foot-social a{
+  width:38px;height:38px;border-radius:8px;background:var(--card);
+  border:1px solid var(--line-2);display:grid;place-items:center;transition:all .2s;
+}
+.foot-social a:hover{background:var(--primary);border-color:var(--primary);color:#000;transform:translateY(-3px)}
+.foot-social svg{width:15px;height:15px;fill:currentColor}
+.foot-col h4{font-size:18px;margin-bottom:18px;letter-spacing:2px}
+.foot-col ul{list-style:none}
+.foot-col ul li{margin-bottom:10px;font-size:13px;color:var(--muted-2)}
+.foot-col ul li a:hover{color:var(--primary)}
+.contact-item{display:flex;gap:12px;margin-bottom:14px;font-size:13px;color:var(--muted-2)}
+.contact-item .ic{
+  width:34px;height:34px;border-radius:8px;flex-shrink:0;
+  background:var(--card);border:1px solid var(--line-2);
+  display:grid;place-items:center;font-size:14px;
+}
+.contact-item strong{display:block;color:var(--text);margin-bottom:2px;font-family:'JetBrains Mono';font-size:11px;letter-spacing:1px;text-transform:uppercase}
+.copyright{
+  text-align:center;padding:20px 0;border-top:1px solid var(--line);
+  color:var(--muted);font-size:12px;font-family:'JetBrains Mono';letter-spacing:1px;text-transform:uppercase;
+}
+.copyright strong{color:var(--primary)}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width:1100px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-main{height:auto;min-height:360px;padding:40px}
+  .hero h1{font-size:64px}
+  .product-grid{grid-template-columns:repeat(4,1fr)}
+  .product-grid.cols-4{grid-template-columns:repeat(3,1fr)}
+  .cat-grid{grid-template-columns:repeat(6,1fr)}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .foot-grid{grid-template-columns:repeat(2,1fr)}
+  .shop-layout{grid-template-columns:1fr}
+  .filter-sidebar{position:static}
+  .cart-grid,.checkout-grid{grid-template-columns:1fr}
+  .pd-grid{grid-template-columns:1fr}
+  .pd-gallery{position:static}
+  .deal-banner{grid-template-columns:1fr;padding:32px}
+}
+@media (max-width:768px){
+  .header-inner{grid-template-columns:auto 1fr auto;gap:12px;height:68px}
+  .searchbar{display:none}
+  .nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--bg-2);z-index:50;border-bottom:1px solid var(--line);flex-direction:column}
+  .nav-menu.open{display:flex}
+  .nav-menu a{border-bottom:1px solid var(--line);width:100%}
+  .nav{position:relative}
+  .nav-hot{display:none}
+  .mobile-toggle{display:grid;place-items:center;width:42px;height:42px;background:var(--bg-2);border-radius:8px;border:1px solid var(--line-2)}
+  .product-grid,.product-grid.cols-4{grid-template-columns:repeat(2,1fr)}
+  .cat-grid{grid-template-columns:repeat(3,1fr)}
+  .section-title{font-size:32px}
+  .hero h1{font-size:48px}
+  .hero-main{padding:28px}
+  .deal-info h2{font-size:40px}
+  .cart-header{display:none}
+  .cart-item{grid-template-columns:80px 1fr;grid-template-areas:"img info" "img price" "img qty" "img total" "img remove";gap:8px}
+  .cart-item-img{grid-area:img;align-self:start}
+  .cart-item-info{grid-area:info}
+  .cart-item-price{grid-area:price;font-size:12px;color:var(--muted)}
+  .cart-item .qty-control{grid-area:qty;width:fit-content}
+  .cart-item-total{grid-area:total}
+  .cart-remove{grid-area:remove;justify-self:end}
+  .cart-item-price::before{content:"Үнэ: "}
+  .icon-btn{width:38px;height:38px}
+  .icon-btn:nth-child(2){display:none}
+  .cart-btn{padding:0 12px;height:38px;gap:6px}
+  .cart-btn .cart-label{display:none}
+  .topstrip{font-size:10px}
+  .pd-info h1{font-size:32px}
+  .pd-price{font-size:32px}
+  .form-grid{grid-template-columns:1fr}
+  .pd-extra{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<!-- ====== TICKER ====== -->
+<div class="topstrip">
+  <div class="ticker">
+    <span>FREE SHIPPING ULAN BATOR · 100,000₮+</span>
+    <span>RTX 5090 IN STOCK · ЭХ МАНДЛАГА 2 ЖИЛ</span>
+    <span>BLACKMARKET DROP 03 · LIVE NOW</span>
+    <span>PS5 PRO · ШИНЭ ХЯМДРАЛ</span>
+    <span>ҮНЭГҮЙ УГСРАЛТ · 5 САЯ+ ЗАХИАЛГАД</span>
+    <span>FREE SHIPPING ULAN BATOR · 100,000₮+</span>
+    <span>RTX 5090 IN STOCK · ЭХ МАНДЛАГА 2 ЖИЛ</span>
+    <span>BLACKMARKET DROP 03 · LIVE NOW</span>
+    <span>PS5 PRO · ШИНЭ ХЯМДРАЛ</span>
+    <span>ҮНЭГҮЙ УГСРАЛТ · 5 САЯ+ ЗАХИАЛГАД</span>
+  </div>
+</div>
+
+<!-- ====== HEADER ====== -->
+<header class="header">
+  <div class="container header-inner">
+    <a href="#/" class="logo">
+      <span class="logo-mark">BM</span>
+      <span class="logo-text">
+        <strong>BLACKMARKET</strong>
+        <small>// underground bazaar</small>
+      </span>
+    </a>
+    <form class="searchbar" onsubmit="event.preventDefault();app.search(this.querySelector('input').value)">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" placeholder="GPU, CPU, дэлгэц, гар, хулгана хайх..." id="search-input">
+      <button type="submit">Хайх</button>
+    </form>
+    <div class="header-actions">
+      <button class="icon-btn theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Дэлгэцийн горим">
+        <svg class="theme-icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="theme-icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+      <button class="icon-btn" onclick="app.go('#/account')" title="Профайл">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </button>
+      <button class="icon-btn" onclick="app.go('#/wishlist')" title="Хадгалсан">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span class="badge" id="wishlist-count">0</span>
+      </button>
+      <a href="#/cart" class="cart-btn">
+        <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-label">Сагс</span>
+        <span class="cart-total" id="cart-total">0₮</span>
+        <span class="badge" id="cart-count">0</span>
+      </a>
+      <button class="mobile-toggle" onclick="document.getElementById('nav-menu').classList.toggle('open')">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- ====== NAV ====== -->
+<nav class="nav">
+  <div class="container nav-inner">
+    <ul class="nav-menu" id="nav-menu">
+      <li><a href="#/shop">Бүх ангилал</a></li>
+      <li><a href="#/" data-route="/">Нүүр</a></li>
+      <li><a href="#/shop" data-route="/shop">Дэлгүүр</a></li>
+      <li><a href="#/category/gpu">GPU</a></li>
+      <li><a href="#/category/cpu">CPU</a></li>
+      <li><a href="#/category/laptop">Зөөврийн</a></li>
+      <li><a href="#/category/ps5">PlayStation</a></li>
+      <li><a href="#/category/setup">Бэлэн сэтап</a></li>
+    </ul>
+    <span class="nav-hot">DROP 03 LIVE</span>
+  </div>
+</nav>
+
+<!-- ====== MAIN ROUTED CONTENT ====== -->
+<main id="app"></main>
+
+<!-- ====== FOOTER ====== -->
+<footer class="footer">
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-about">
+        <a href="#/" class="logo">
+          <span class="logo-mark">BM</span>
+          <span class="logo-text">
+            <strong>BLACKMARKET</strong>
+            <small>// underground bazaar</small>
+          </span>
+        </a>
+        <p>Underground tech bazaar. Монгол улсын дэлгэр gaming, render, оффис компьютерийн худалдаа.</p>
+        <div class="foot-social">
+          <a href="#"><svg viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg></a>
+          <a href="#"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231z"/></svg></a>
+          <a href="#"><svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58 0 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07s-3.58 0-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85s0-3.58.07-4.85C2.5 3.92 4.01 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16zm0 1.62c-3.15 0-3.5 0-4.74.07-2.6.12-3.66 1.19-3.78 3.78-.06 1.24-.07 1.59-.07 4.74s0 3.5.07 4.74c.12 2.59 1.19 3.66 3.78 3.78 1.24.06 1.59.07 4.74.07s3.5 0 4.74-.07c2.6-.12 3.66-1.19 3.78-3.78z"/></svg></a>
+          <a href="#"><svg viewBox="0 0 24 24"><path d="M23.5 6.51a3.01 3.01 0 0 0-2.12-2.12C19.5 4 12 4 12 4s-7.5 0-9.38.39A3.01 3.01 0 0 0 .5 6.51 31.43 31.43 0 0 0 .11 12a31.43 31.43 0 0 0 .39 5.49 3.01 3.01 0 0 0 2.12 2.12C4.5 20 12 20 12 20s7.5 0 9.38-.39a3.01 3.01 0 0 0 2.12-2.12A31.43 31.43 0 0 0 23.89 12a31.43 31.43 0 0 0-.39-5.49zM9.75 15.27V8.73L15.5 12z"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Дэлгүүр</h4>
+        <ul>
+          <li><a href="#/shop">Бүх бүтээгдэхүүн</a></li>
+          <li><a href="#/category/gpu">GPU</a></li>
+          <li><a href="#/category/cpu">CPU</a></li>
+          <li><a href="#/category/laptop">Зөөврийн</a></li>
+          <li><a href="#/category/setup">Бэлэн сэтап</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Туслах</h4>
+        <ul>
+          <li><a href="#/legal/returns">Хүргэлт, төлбөр</a></li>
+          <li><a href="#/legal/returns">Баталгаа</a></li>
+          <li><a href="#/legal/returns">Буцаалт</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Хууль зүй</h4>
+        <ul>
+          <li><a href="#/legal/privacy">Хувийн нууцлал</a></li>
+          <li><a href="#/legal/terms">Үйлчилгээний нөхцөл</a></li>
+          <li><a href="#/legal/returns">Буцаалтын нөхцөл</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Холбоо</h4>
+        <div class="contact-item">
+          <div class="ic">📞</div>
+          <div><strong>Утас</strong>+976 7505-1515<br>+976 8889-8998</div>
+        </div>
+        <div class="contact-item">
+          <div class="ic">✉️</div>
+          <div><strong>Email</strong>hello@blackmarket.mn</div>
+        </div>
+        <div class="contact-item">
+          <div class="ic">📍</div>
+          <div><strong>Hayag</strong>УБ хот, СБД, 1-р хороо</div>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      © 2026 <strong>BLACKMARKET LLC.</strong> // All rights reserved // Underground tech bazaar
+    </div>
+  </div>
+</footer>
+
+<div class="toast-container" id="toast-container"></div>
+
+<!-- ============ SUPABASE SDK ============ -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* =================================================================
+   ⚠️  SUPABASE ТОХИРГОО — Энэ 2 утгыг өөрийнхөөрөө солино уу
+   ================================================================= */
+const SUPABASE_URL = 'https://anlzmxphvdtymdacrxsd.supabase.co';      // ← Supabase Settings → API → Project URL
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFubHpteHBodmR0eW1kYWNyeHNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk0NDI2NDYsImV4cCI6MjA5NTAxODY0Nn0.y8O8w3f30AwEVEiOM1g28kU64x0QjQwMboQgJqKhWAs';  // ← Supabase Settings → API → anon public key
+
+/* Жишээ:
+const SUPABASE_URL = 'https://anlzmxphvdtymdacrxsd.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIs.....маш-урт-текст......';
+*/
+
+const db = (SUPABASE_URL.startsWith('http') && SUPABASE_KEY.length > 20)
+  ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
+  : null;
+</script>
+
+<script>
+/* =================================================================
+   BLACKMARKET — Working e-commerce SPA
+   ================================================================= */
+
+// ============ PRODUCT DATABASE ============
+// Анхдагч өгөгдөл — хэрэв Supabase холбогдоогүй эсвэл өгөгдөл ороогүй бол ашиглана
+let PRODUCTS = [
+  // GPU
+  {id:'p1',name:'MSI Gaming Trio GeForce RTX 5080 16GB OC',cat:'gpu',catName:'GPU',brand:'MSI',price:5900000,old:6300000,img:'🎮',badge:'NEW',rating:4.9,stock:8,
+    specs:{Chipset:'NVIDIA RTX 5080',Memory:'16GB GDDR7',Interface:'PCIe 5.0',Power:'360W',Outputs:'HDMI 2.1, 3x DP 2.1'},
+    desc:'MSI Gaming Trio загвар RTX 5080. 4K, 240FPS гүйцэтгэл, DLSS 4 болон ray tracing-ийн дэлгэрэнгүй ажиллагаатай.'},
+  {id:'p2',name:'ASUS PRIME GeForce RTX 5080 16GB GDDR7',cat:'gpu',catName:'GPU',brand:'ASUS',price:5800000,old:0,img:'🎮',badge:'',rating:4.8,stock:5,
+    specs:{Chipset:'NVIDIA RTX 5080',Memory:'16GB GDDR7',Interface:'PCIe 5.0',Power:'320W',Outputs:'HDMI 2.1, 3x DP 2.1'},
+    desc:'ASUS PRIME загварын RTX 5080. Гурван fan хөргөлт, нам дуу.'},
+  {id:'p3',name:'ASUS Dual GeForce RTX 5070 12GB GDDR7 OC',cat:'gpu',catName:'GPU',brand:'ASUS',price:2600000,old:2800000,img:'🎮',badge:'-7%',rating:4.9,stock:12,
+    specs:{Chipset:'NVIDIA RTX 5070',Memory:'12GB GDDR7',Interface:'PCIe 5.0',Power:'220W',Outputs:'HDMI 2.1, 3x DP 2.1'},
+    desc:'1440p тоглоомд тохирсон оптимал GPU. ASUS-ийн нэр хүндтэй дизайн.'},
+  {id:'p4',name:'Gigabyte RTX 5070 WINDFORCE OC SFF 12GB',cat:'gpu',catName:'GPU',brand:'Gigabyte',price:2600000,old:2800000,img:'🎮',badge:'-7%',rating:4.8,stock:9,
+    specs:{Chipset:'NVIDIA RTX 5070',Memory:'12GB GDDR7',Interface:'PCIe 5.0',Power:'220W',Outputs:'HDMI 2.1, 3x DP 2.1'},
+    desc:'Small form-factor дизайн, ITX тохиргоонд тохиромжтой.'},
+  {id:'p5',name:'NVIDIA GeForce RTX 5090 Founders 32GB',cat:'gpu',catName:'GPU',brand:'NVIDIA',price:9500000,old:0,img:'🎮',badge:'HOT',rating:5.0,stock:2,
+    specs:{Chipset:'NVIDIA RTX 5090',Memory:'32GB GDDR7',Interface:'PCIe 5.0',Power:'575W',Outputs:'HDMI 2.1, 3x DP 2.1'},
+    desc:'Хамгийн хүчирхэг consumer GPU. AI, render, 8K gaming.'},
+  // CPU
+  {id:'p6',name:'AMD Ryzen 7 9800X3D Gaming Processor',cat:'cpu',catName:'CPU',brand:'AMD',price:1700000,old:0,img:'🧠',badge:'HOT',rating:5.0,stock:6,
+    specs:{Cores:'8 Cores / 16 Threads',Cache:'104MB',Base:'4.7GHz',Boost:'5.2GHz',Socket:'AM5',TDP:'120W'},
+    desc:'Gaming-д зориулсан AMD-ийн топ процессор. 3D V-Cache технологи.'},
+  {id:'p7',name:'AMD Ryzen 7 7800X3D Gaming Processor',cat:'cpu',catName:'CPU',brand:'AMD',price:1450000,old:0,img:'🧠',badge:'',rating:4.9,stock:8,
+    specs:{Cores:'8 Cores / 16 Threads',Cache:'96MB',Base:'4.2GHz',Boost:'5.0GHz',Socket:'AM5',TDP:'120W'},
+    desc:'Өмнөх үеийн 3D V-Cache процессор. Үнэ хямд боловч gaming-д хүчтэй.'},
+  {id:'p8',name:'AMD Ryzen 7 9700X Gaming Processor',cat:'cpu',catName:'CPU',brand:'AMD',price:1200000,old:0,img:'🧠',badge:'',rating:4.8,stock:10,
+    specs:{Cores:'8 Cores / 16 Threads',Cache:'40MB',Base:'3.8GHz',Boost:'5.5GHz',Socket:'AM5',TDP:'65W'},
+    desc:'Бага TDP-той, олон зориулалттай.'},
+  {id:'p9',name:'AMD Ryzen 9 9950X3D Gaming Processor',cat:'cpu',catName:'CPU',brand:'AMD',price:2350000,old:0,img:'🧠',badge:'NEW',rating:5.0,stock:4,
+    specs:{Cores:'16 Cores / 32 Threads',Cache:'144MB',Base:'4.3GHz',Boost:'5.7GHz',Socket:'AM5',TDP:'170W'},
+    desc:'Дээд хэмжээний AMD desktop CPU. Render, gaming, workstation.'},
+  {id:'p10',name:'Intel Core Ultra 9 285K',cat:'cpu',catName:'CPU',brand:'Intel',price:2100000,old:0,img:'🧠',badge:'',rating:4.7,stock:5,
+    specs:{Cores:'24 Cores (8P+16E)',Cache:'36MB',Base:'3.7GHz',Boost:'5.7GHz',Socket:'LGA1851',TDP:'125W'},
+    desc:'Intel-ийн шинэ Arrow Lake архитектур.'},
+  // Monitor
+  {id:'p11',name:'Asus ROG Strix XG27UCGR (4K 162Hz)',cat:'monitor',catName:'Monitor',brand:'ASUS',price:1250000,old:0,img:'🖥️',badge:'NEW',rating:4.8,stock:6,
+    specs:{Size:'27 inch',Resolution:'4K UHD',Refresh:'162Hz',Panel:'IPS',HDR:'HDR400',Response:'1ms GTG'},
+    desc:'Dual-mode 4K@162Hz эсвэл FHD@485Hz.'},
+  {id:'p12',name:'ZOWIE XL2566X+ Fast TN 400Hz DyAc 2',cat:'monitor',catName:'Monitor',brand:'ZOWIE',price:2500000,old:2700000,img:'🖥️',badge:'-7%',rating:5.0,stock:3,
+    specs:{Size:'24.5 inch',Resolution:'FHD 1080p',Refresh:'400Hz',Panel:'Fast TN',HDR:'No',Response:'0.5ms'},
+    desc:'Профессионал esports тоглогчдод зориулсан 400Hz дэлгэц.'},
+  {id:'p13',name:'Acer Nitro K270 Hbi 27 inch 100Hz FHD',cat:'monitor',catName:'Monitor',brand:'Acer',price:320000,old:400000,img:'🖥️',badge:'-20%',rating:4.4,stock:15,
+    specs:{Size:'27 inch',Resolution:'FHD 1080p',Refresh:'100Hz',Panel:'VA',HDR:'No',Response:'1ms'},
+    desc:'Үнэ хямдтай, өргөн зориулалттай дэлгэц.'},
+  {id:'p14',name:'LG UltraGear OLED 27GR95QE',cat:'monitor',catName:'Monitor',brand:'LG',price:1850000,old:0,img:'🖥️',badge:'',rating:4.9,stock:4,
+    specs:{Size:'27 inch',Resolution:'QHD 1440p',Refresh:'240Hz',Panel:'OLED',HDR:'HDR400 True Black',Response:'0.03ms'},
+    desc:'OLED-ийн өнгөний мөн чанар, esports-ийн хурд.'},
+  // Mouse
+  {id:'p15',name:'Razer DeathAdder V4 Pro Wireless',cat:'mouse',catName:'Mouse',brand:'Razer',price:690000,old:0,img:'🖱️',badge:'NEW',rating:5.0,stock:14,
+    specs:{Sensor:'Focus Pro 35K',DPI:'35,000',Buttons:'8',Weight:'63g',Battery:'150h',Connection:'Wireless'},
+    desc:'Razer-ийн esports gaming mouse-ийн флагман.'},
+  {id:'p16',name:'Logitech G PRO X Superlight 2',cat:'mouse',catName:'Mouse',brand:'Logitech',price:420000,old:0,img:'🖱️',badge:'',rating:4.9,stock:18,
+    specs:{Sensor:'HERO 2 32K',DPI:'32,000',Buttons:'5',Weight:'60g',Battery:'95h',Connection:'Wireless'},
+    desc:'Хөнгөн, нарийвчлал өндөртэй wireless mouse.'},
+  {id:'p17',name:'ZOWIE S2-DW 4K Wireless',cat:'mouse',catName:'Mouse',brand:'ZOWIE',price:580000,old:0,img:'🖱️',badge:'',rating:4.8,stock:7,
+    specs:{Sensor:'PAW3950',DPI:'36,000',Buttons:'5',Weight:'62g',Battery:'80h',Connection:'4K Wireless'},
+    desc:'4K polling rate-тэй esports mouse.'},
+  {id:'p18',name:'Logitech MX Master 4 Wireless',cat:'mouse',catName:'Mouse',brand:'Logitech',price:450000,old:0,img:'🖱️',badge:'',rating:4.9,stock:11,
+    specs:{Sensor:'Darkfield High Precision',DPI:'8,000',Buttons:'7',Weight:'141g',Battery:'70 days',Connection:'Bluetooth/USB-C'},
+    desc:'Productivity ажилд зориулсан премиум mouse.'},
+  // Keyboard
+  {id:'p19',name:'Razer BlackWidow V4 Pro 75% Wireless',cat:'keyboard',catName:'Keyboard',brand:'Razer',price:880000,old:0,img:'⌨️',badge:'NEW',rating:4.9,stock:6,
+    specs:{Switch:'Razer Green Tactile',Layout:'75%',Backlight:'Razer Chroma RGB',Battery:'2000h',Connection:'Wireless/USB-C'},
+    desc:'Hot-swappable wireless mechanical keyboard.'},
+  {id:'p20',name:'Logitech G PRO X 60 LIGHTSPEED',cat:'keyboard',catName:'Keyboard',brand:'Logitech',price:600000,old:0,img:'⌨️',badge:'',rating:4.8,stock:9,
+    specs:{Switch:'GX Optical',Layout:'60%',Backlight:'LIGHTSYNC RGB',Battery:'40h',Connection:'LIGHTSPEED Wireless'},
+    desc:'Esports-д зориулсан 60% wireless keyboard.'},
+  // Laptop
+  {id:'p21',name:'Apple Macbook Air M4 13 inch Sky Blue',cat:'laptop',catName:'Laptop',brand:'Apple',price:3600000,old:0,img:'💻',badge:'NEW',rating:5.0,stock:7,
+    specs:{Chip:'Apple M4',RAM:'16GB',SSD:'512GB',Display:'13.6" Liquid Retina',Battery:'18h',Weight:'1.24kg'},
+    desc:'Apple Silicon-ийн дэлгэрэнгүй гүйцэтгэл, 18 цагийн батерей.'},
+  {id:'p22',name:'Dell Latitude 5550 15.6 inch Core Ultra 7',cat:'laptop',catName:'Laptop',brand:'Dell',price:4000000,old:0,img:'💻',badge:'',rating:4.8,stock:5,
+    specs:{Chip:'Core Ultra 7 165H',RAM:'16GB DDR5',SSD:'512GB',Display:'15.6" FHD+',Battery:'10h',Weight:'1.6kg'},
+    desc:'Бизнес зориулалттай зөөврийн компьютер.'},
+  {id:'p23',name:'ASUS ROG Zephyrus G16 RTX 5080',cat:'laptop',catName:'Laptop',brand:'ASUS',price:7500000,old:0,img:'💻',badge:'HOT',rating:4.9,stock:3,
+    specs:{Chip:'Ryzen 9 9955HX',RAM:'32GB DDR5',SSD:'1TB Gen4',GPU:'RTX 5080 12GB',Display:'16" OLED 240Hz',Battery:'9h'},
+    desc:'Gaming + render зориулалттай зөөврийн.'},
+  // PS5
+  {id:'p24',name:'PlayStation 5 Pro Disc Edition',cat:'ps5',catName:'PlayStation',brand:'Sony',price:2400000,old:0,img:'🕹️',badge:'HOT',rating:5.0,stock:4,
+    specs:{Type:'Console',Storage:'2TB SSD',Output:'8K HDR',Resolution:'4K @ 120FPS',RayTracing:'Advanced',Disc:'Ultra HD Blu-ray'},
+    desc:'PlayStation-ийн дээд зэргийн консол.'},
+  {id:'p25',name:'PlayStation DualSense Wireless Controller',cat:'ps5',catName:'PlayStation',brand:'Sony',price:280000,old:0,img:'🎮',badge:'',rating:4.9,stock:25,
+    specs:{Type:'Controller',Battery:'12h',Haptic:'Yes',Adaptive:'Yes',Speaker:'Built-in',Colors:'White/Black/Blue/Pink/Purple'},
+    desc:'PS5-ийн стандарт wireless controller.'},
+  {id:'p26',name:'Tekken 8 PS5',cat:'ps5',catName:'PlayStation',brand:'Bandai Namco',price:130000,old:180000,img:'🕹️',badge:'-28%',rating:4.8,stock:20,
+    specs:{Genre:'Fighting',Players:'1-2 + Online',Region:'All',Language:'English',Age:'16+',Disc:'PS5 Blu-ray'},
+    desc:'Tekken цуврал шинэ үргэлжлэл.'},
+  // Memory/Storage
+  {id:'p27',name:'Samsung 9100 PRO 2TB Gen5 NVMe SSD',cat:'ssd',catName:'SSD',brand:'Samsung',price:820000,old:0,img:'💿',badge:'NEW',rating:5.0,stock:8,
+    specs:{Capacity:'2TB',Interface:'PCIe Gen5 x4',Read:'14,800 MB/s',Write:'13,400 MB/s',Type:'NVMe M.2 2280',Warranty:'5 years'},
+    desc:'Дэлхийн хамгийн хурдан consumer SSD.'},
+  {id:'p28',name:'Samsung T7 Shield Portable SSD 1TB',cat:'ssd',catName:'SSD',brand:'Samsung',price:750000,old:0,img:'💿',badge:'',rating:4.8,stock:12,
+    specs:{Capacity:'1TB',Interface:'USB 3.2 Gen 2',Read:'1,050 MB/s',Write:'1,000 MB/s',Type:'Portable',Rating:'IP65'},
+    desc:'Усны/тоосны хамгаалалттай гадаад SSD.'},
+  {id:'p29',name:'Corsair Vengeance DDR5 64GB 6400 CL32',cat:'ram',catName:'RAM',brand:'Corsair',price:680000,old:0,img:'💾',badge:'',rating:4.7,stock:9,
+    specs:{Capacity:'64GB (2x32GB)',Speed:'6400MT/s',Latency:'CL32',Type:'DDR5',Voltage:'1.4V',Form:'DIMM'},
+    desc:'Render, contentcreators-д зориулсан өндөр хүчин чадалтай RAM.'},
+  // Cooler/PSU/Case
+  {id:'p30',name:'Thermalright Peerless Vision 360 ARGB White',cat:'cooler',catName:'Cooler',brand:'Thermalright',price:320000,old:350000,img:'❄️',badge:'-9%',rating:4.8,stock:11,
+    specs:{Type:'AIO Liquid',Radiator:'360mm',Fans:'3x 120mm ARGB',Compat:'Intel/AMD AM5',TDP:'400W',Warranty:'6 years'},
+    desc:'Гүйцэтгэл өндөртэй өгөөмөр AIO хөргөгч.'},
+  {id:'p31',name:'Asus ROG Ryuo IV SLC 360 ARGB',cat:'cooler',catName:'Cooler',brand:'ASUS',price:1200000,old:0,img:'❄️',badge:'NEW',rating:4.9,stock:5,
+    specs:{Type:'AIO Liquid',Radiator:'360mm',Display:'3.5" OLED',Fans:'3x ARGB',Compat:'Universal',TDP:'500W'},
+    desc:'OLED дэлгэц бүхий премиум AIO.'},
+  {id:'p32',name:'Thermalright TR-TG1350-W 80 Plus Gold 1350W',cat:'psu',catName:'PSU',brand:'Thermalright',price:580000,old:0,img:'⚡',badge:'',rating:4.7,stock:7,
+    specs:{Wattage:'1350W',Certification:'80 Plus Gold',Modular:'Full Modular',Cables:'ATX 3.1 + PCIe 5.1',Fan:'135mm FDB',Warranty:'10 years'},
+    desc:'RTX 5090 системд хангалттай хүчин чадалтай.'},
+  {id:'p33',name:'NZXT H7 Flow RGB Mid-Tower Gaming Case',cat:'case',catName:'Case',brand:'NZXT',price:420000,old:0,img:'📦',badge:'NEW',rating:4.6,stock:10,
+    specs:{Form:'Mid-Tower ATX',Material:'Steel + Tempered Glass',Fans:'3x RGB included',Slots:'7 PCI',Drives:'2x 3.5" / 4x 2.5"',Length:'410mm GPU'},
+    desc:'Mesh front-тэй gaming case.'},
+  // Mboard
+  {id:'p34',name:'ASUS ROG STRIX B760-G GAMING WIFI S D5',cat:'board',catName:'Motherboard',brand:'ASUS',price:750000,old:780000,img:'🔌',badge:'-4%',rating:4.7,stock:8,
+    specs:{Socket:'LGA1700',Chipset:'B760',Memory:'4x DDR5 7800MHz',Form:'mATX',WiFi:'WiFi 6E',M2:'3 slots'},
+    desc:'Шинэ үеийн Intel-д зориулсан mATX board.'},
+  {id:'p35',name:'Asus TUF GAMING B660M-PLUS WIFI D5',cat:'board',catName:'Motherboard',brand:'ASUS',price:550000,old:600000,img:'🔌',badge:'-8%',rating:4.6,stock:13,
+    specs:{Socket:'LGA1700',Chipset:'B660',Memory:'4x DDR5 6400MHz',Form:'mATX',WiFi:'WiFi 6',M2:'2 slots'},
+    desc:'Бэлэн нөөцтэй TUF цуврал.'},
+  // Chair / Misc
+  {id:'p36',name:'AndaSeat Phantom 3 V2 Gaming Chair Blue',cat:'chair',catName:'Chair',brand:'AndaSeat',price:500000,old:0,img:'🪑',badge:'',rating:4.7,stock:5,
+    specs:{Material:'PVC Leather',Weight:'150kg max',Recline:'160°',Armrest:'4D',Lumbar:'Adjustable',Warranty:'5 years'},
+    desc:'Эргономик gaming чандгар.'},
+  {id:'p37',name:'Loctekmotion ET156W-C Electric Desk',cat:'desk',catName:'Desk',brand:'Loctekmotion',price:750000,old:0,img:'🪑',badge:'',rating:4.7,stock:6,
+    specs:{Size:'140x70cm',Adjust:'Electric',Range:'72-120cm',Material:'MDF + Steel',Memory:'4 presets',Weight:'120kg max'},
+    desc:'Цахилгаан өндөр тохируулагдах ширээ.'},
+  {id:'p38',name:'HyperX Cloud Alpha 2 Wireless',cat:'headset',catName:'Headset',brand:'HyperX',price:520000,old:0,img:'🎧',badge:'NEW',rating:4.7,stock:8,
+    specs:{Type:'Wireless',Driver:'53mm',Battery:'250h',Mic:'Detachable',Codec:'DTS Headphone:X',Connection:'2.4GHz + Bluetooth'},
+    desc:'Тав тухтай, удаан хугацааны wireless headset.'},
+  {id:'p39',name:'Logitech MX Brio UHD 4K Webcam',cat:'webcam',catName:'Webcam',brand:'Logitech',price:600000,old:0,img:'📷',badge:'',rating:4.7,stock:10,
+    specs:{Resolution:'4K UHD 30fps',Sensor:'Sony STARVIS',FOV:'90°/78°/65°',Mic:'Dual Beamforming',AI:'Show Mode',Privacy:'Built-in shutter'},
+    desc:'Профессионал стриминг, видео дуудлагад.'},
+  // Setup
+  {id:'p40',name:'BLACK Setup · Entry Office',cat:'setup',catName:'Setup',brand:'BLACKMARKET',price:2500000,old:0,img:'💼',badge:'',rating:4.6,stock:99,
+    specs:{CPU:'Intel Core i5-14400',RAM:'16GB DDR5',SSD:'512GB NVMe',GPU:'Integrated',Case:'Mid-Tower',PSU:'500W Bronze'},
+    desc:'Албан газар, оюутны хувьд бэлэн угсралт.'},
+  {id:'p41',name:'BLACK Setup · Stream Pro',cat:'setup',catName:'Setup',brand:'BLACKMARKET',price:6200000,old:0,img:'🎥',badge:'HOT',rating:4.9,stock:99,
+    specs:{CPU:'Ryzen 7 9700X',RAM:'32GB DDR5 6000',SSD:'1TB Gen4',GPU:'RTX 5070 12GB',Case:'Mid-Tower Mesh',PSU:'850W Gold'},
+    desc:'Streamер, content creator-уудад тохирсон.'},
+  {id:'p42',name:'BLACK Setup · BEAST Render',cat:'setup',catName:'Setup',brand:'BLACKMARKET',price:14800000,old:0,img:'🚀',badge:'HOT',rating:5.0,stock:99,
+    specs:{CPU:'Ryzen 9 9950X3D',RAM:'64GB DDR5 6400',SSD:'2TB Samsung 9100',GPU:'RTX 5090 32GB',Case:'Full Tower',PSU:'1350W Platinum'},
+    desc:'Дээд зэрэг рендер, AI training, 4K gaming setup.'}
+];
+
+const CATEGORIES = [
+  {id:'cpu',name:'CPU',icon:'🧠'},
+  {id:'gpu',name:'GPU',icon:'🎮'},
+  {id:'board',name:'Board',icon:'🔌'},
+  {id:'ram',name:'RAM',icon:'💾'},
+  {id:'ssd',name:'SSD',icon:'💿'},
+  {id:'psu',name:'PSU',icon:'⚡'},
+  {id:'cooler',name:'Cooler',icon:'❄️'},
+  {id:'case',name:'Case',icon:'📦'},
+  {id:'monitor',name:'Monitor',icon:'🖥️'},
+  {id:'mouse',name:'Mouse',icon:'🖱️'},
+  {id:'keyboard',name:'Keyboard',icon:'⌨️'},
+  {id:'headset',name:'Headset',icon:'🎧'},
+  {id:'laptop',name:'Laptop',icon:'💻'},
+  {id:'ps5',name:'PS5',icon:'🕹️'},
+  {id:'chair',name:'Chair',icon:'🪑'},
+  {id:'desk',name:'Desk',icon:'🛋️'},
+  {id:'webcam',name:'Webcam',icon:'📷'},
+  {id:'setup',name:'Setup',icon:'🚀'}
+];
+
+const BRANDS = ['ASUS','MSI','Gigabyte','NVIDIA','AMD','Intel','Razer','Logitech','Samsung','Corsair','ZOWIE','HyperX','Apple','Dell','Sony','NZXT','Thermalright','BLACKMARKET'];
+
+// ============ SUPABASE PRODUCT LOADER ============
+// Хэрэв Supabase холбогдсон бол database-ээс бараагаа татна. Үгүй бол дээрх анхдагч жагсаалтыг ашиглана.
+async function loadProductsFromSupabase(){
+  if(!db) return false;
+  try{
+    // Parallel: products + product_stats (бодит дундаж үнэлгээ)
+    const [prodRes, statsRes] = await Promise.all([
+      db.from('products').select('*').eq('active', true).order('created_at', {ascending: false}),
+      db.from('product_stats').select('product_id, avg_rating, review_count')
+    ]);
+    if(prodRes.error) throw prodRes.error;
+    const statsMap = {};
+    (statsRes.data||[]).forEach(s => { statsMap[s.product_id] = s; });
+
+    const data = prodRes.data;
+    if(data && data.length > 0){
+      PRODUCTS = data.map(p => {
+        const stats = statsMap[p.id] || {};
+        return {
+          id: p.id,
+          name: p.name,
+          cat: p.category,
+          catName: p.category_name,
+          brand: p.brand,
+          price: Number(p.price),
+          old: Number(p.old_price || 0),
+          img: p.image || '📦',
+          imageUrl: p.image_url || '',
+          badge: p.badge || '',
+          rating: Number(stats.avg_rating || p.rating || 4.5),
+          reviewCount: Number(stats.review_count || 0),
+          stock: Number(p.stock || 0),
+          specs: p.specs || {},
+          desc: p.description || ''
+        };
+      });
+      console.log('✓ Loaded', PRODUCTS.length, 'products from Supabase');
+      return true;
+    }
+    return false;
+  }catch(e){
+    console.warn('Supabase load failed:', e.message);
+    return false;
+  }
+}
+
+// Анхдагч 42 бүтээгдэхүүнийг Supabase-д оруулах (зөвхөн нэг удаа)
+async function seedProductsToSupabase(){
+  if(!db) {
+    toast('Supabase холбогдоогүй байна', 'error');
+    return;
+  }
+  try{
+    const rows = PRODUCTS.map(p => ({
+      id: p.id,
+      name: p.name,
+      category: p.cat,
+      category_name: p.catName,
+      brand: p.brand,
+      price: p.price,
+      old_price: p.old || 0,
+      image: p.img,
+      badge: p.badge || '',
+      rating: p.rating,
+      stock: p.stock,
+      description: p.desc,
+      specs: p.specs,
+      active: true
+    }));
+    const {error} = await db.from('products').upsert(rows);
+    if(error) throw error;
+    toast(`✓ ${rows.length} бүтээгдэхүүн орлоо!`);
+    setTimeout(()=>location.reload(), 1500);
+  }catch(e){
+    console.error(e);
+    toast('Алдаа: ' + e.message, 'error');
+  }
+}
+window.seedProductsToSupabase = seedProductsToSupabase;
+
+// ============ APP STATE ============
+const STORAGE_KEY = 'blackmarket_state_v1';
+
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw) return JSON.parse(raw);
+  }catch(e){}
+  return {cart:[], wishlist:[]};
+}
+function saveState(){
+  try{localStorage.setItem(STORAGE_KEY, JSON.stringify(state));}catch(e){}
+}
+let state = loadState();
+
+// ============ AUTH STATE ============
+let currentUser = null; // {id, email, ...} эсвэл null
+
+async function refreshSession(){
+  if(!db){currentUser=null; return}
+  try{
+    const {data:{session}} = await db.auth.getSession();
+    currentUser = session?.user || null;
+  }catch(e){
+    console.warn('Session check failed:', e.message);
+    currentUser = null;
+  }
+}
+
+// ============ THEME ============
+function toggleTheme(){
+  const cur = document.documentElement.getAttribute('data-theme') || 'dark';
+  const next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try{ localStorage.setItem('blackmarket_theme', next); }catch(e){}
+  // theme-color meta-г шинэчлэх
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if(meta) meta.setAttribute('content', next==='light' ? '#ffffff' : '#181a20');
+}
+window.toggleTheme = toggleTheme;
+
+// ============ HELPERS ============
+const fmt = n => Number(n).toLocaleString('mn-MN') + '₮';
+const $ = (sel,p=document)=>p.querySelector(sel);
+const $$ = (sel,p=document)=>Array.from(p.querySelectorAll(sel));
+const escapeHtml = s => String(s||'').replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const findProduct = id => PRODUCTS.find(p=>p.id===id);
+
+function toast(msg, type='success'){
+  const c = $('#toast-container');
+  const t = document.createElement('div');
+  t.className = 'toast ' + type;
+  const icons = {success:'✓', error:'✕', warn:'!'};
+  t.innerHTML = `<span class="toast-icon">${icons[type]||'✓'}</span><span>${escapeHtml(msg)}</span>`;
+  c.appendChild(t);
+  setTimeout(()=>{
+    t.classList.add('removing');
+    setTimeout(()=>t.remove(), 300);
+  }, 3000);
+}
+
+function updateHeader(){
+  const count = state.cart.reduce((s,i)=>s+i.qty, 0);
+  const total = state.cart.reduce((s,i)=>{const p=findProduct(i.id); return s + (p?p.price*i.qty:0)}, 0);
+  $('#cart-count').textContent = count;
+  $('#cart-count').style.display = count ? 'grid' : 'none';
+  $('#cart-total').textContent = fmt(total);
+  const wcount = state.wishlist.length;
+  $('#wishlist-count').textContent = wcount;
+  $('#wishlist-count').style.display = wcount ? 'grid' : 'none';
+
+  // Profile товч — нэвтэрсэн бол үнэлгээ
+  const accountBtn = document.querySelector('.icon-btn[title="Профайл"]');
+  if(accountBtn){
+    accountBtn.title = currentUser ? ('Профайл · ' + currentUser.email) : 'Нэвтрэх / Бүртгүүлэх';
+    accountBtn.style.borderColor = currentUser ? 'var(--primary)' : '';
+    accountBtn.style.color = currentUser ? 'var(--primary)' : '';
+  }
+}
+
+// ============ CART OPERATIONS ============
+function addToCart(id, qty=1){
+  const p = findProduct(id);
+  if(!p) return;
+  if(p.stock <= 0){
+    toast('Бараа дууссан байна', 'error');
+    return;
+  }
+  const existing = state.cart.find(i=>i.id===id);
+  if(existing){
+    existing.qty = Math.min(existing.qty+qty, p.stock);
+  }else{
+    state.cart.push({id, qty:Math.min(qty,p.stock)});
+  }
+  saveState();
+  updateHeader();
+  toast(`✓ Сагсанд нэмэгдлээ: ${p.name.substring(0,40)}${p.name.length>40?'...':''}`);
+}
+function removeFromCart(id){
+  state.cart = state.cart.filter(i=>i.id!==id);
+  saveState();
+  updateHeader();
+  if(location.hash==='#/cart') router();
+}
+function updateCartQty(id, qty){
+  const p = findProduct(id);
+  const item = state.cart.find(i=>i.id===id);
+  if(!item || !p) return;
+  qty = Math.max(1, Math.min(qty, p.stock));
+  item.qty = qty;
+  saveState();
+  updateHeader();
+}
+function clearCart(){
+  state.cart = [];
+  saveState();
+  updateHeader();
+}
+// ============ AUTH ACTIONS ============
+async function authSignUp(){
+  if(!db){toast('Supabase холбогдоогүй', 'error'); return}
+  const name = document.getElementById('su-name')?.value.trim();
+  const email = document.getElementById('su-email')?.value.trim();
+  const phone = document.getElementById('su-phone')?.value.trim();
+  const pass = document.getElementById('su-pass')?.value;
+  if(!name||!email||!phone||!pass){toast('Бүх талбарыг бөглөнө үү', 'error'); return}
+  if(pass.length < 6){toast('Нууц үг 6+ тэмдэгт байх ёстой', 'error'); return}
+  const btn = document.getElementById('su-btn');
+  if(btn){btn.disabled = true; btn.textContent = 'Үүсгэж байна...'}
+  try{
+    const {data, error} = await db.auth.signUp({
+      email, password: pass,
+      options:{ data:{ full_name: name, phone } }
+    });
+    if(error) throw error;
+    if(data.session){
+      currentUser = data.user;
+      toast('Бүртгэл амжилттай үүслээ');
+      location.hash = '#/account';
+      router();
+    }else{
+      toast('Имэйлээ шалгаад баталгаажуулах линк дарна уу');
+    }
+  }catch(e){
+    toast('Алдаа: ' + e.message, 'error');
+  }finally{
+    if(btn){btn.disabled = false; btn.textContent = 'Бүртгүүлэх'}
+  }
+}
+
+async function authSignIn(){
+  if(!db){toast('Supabase холбогдоогүй', 'error'); return}
+  const email = document.getElementById('si-email')?.value.trim();
+  const pass = document.getElementById('si-pass')?.value;
+  if(!email||!pass){toast('Имэйл, нууц үгээ оруулна уу', 'error'); return}
+  const btn = document.getElementById('si-btn');
+  if(btn){btn.disabled = true; btn.textContent = 'Нэвтэрч байна...'}
+  try{
+    const {data, error} = await db.auth.signInWithPassword({email, password: pass});
+    if(error) throw error;
+    currentUser = data.user;
+    toast('Тавтай морил, ' + (data.user.email||''));
+    location.hash = '#/account';
+    router();
+  }catch(e){
+    toast('Алдаа: ' + e.message, 'error');
+  }finally{
+    if(btn){btn.disabled = false; btn.textContent = 'Нэвтрэх'}
+  }
+}
+
+async function authSignOut(){
+  if(!db) return;
+  await db.auth.signOut();
+  currentUser = null;
+  toast('Гарлаа');
+  location.hash = '#/';
+  router();
+}
+
+async function authResetPassword(){
+  if(!db){toast('Supabase холбогдоогүй', 'error'); return}
+  const email = (document.getElementById('si-email')?.value||'').trim() || prompt('Сэргээх имэйлээ оруулна уу:');
+  if(!email) return;
+  try{
+    const {error} = await db.auth.resetPasswordForEmail(email, {
+      redirectTo: location.origin + location.pathname + '#/account'
+    });
+    if(error) throw error;
+    toast('✓ Имэйл рүү сэргээх линк илгээгдлээ');
+  }catch(e){
+    toast('Алдаа: ' + e.message, 'error');
+  }
+}
+
+async function authUpdateProfile(){
+  if(!db || !currentUser){toast('Эхлээд нэвтэрнэ үү', 'error'); return}
+  const name = document.getElementById('pe-name')?.value.trim();
+  const phone = document.getElementById('pe-phone')?.value.trim();
+  if(!name){toast('Нэрээ бөглөнө үү', 'error'); return}
+  const btn = document.getElementById('pe-btn');
+  if(btn){btn.disabled = true; btn.textContent = 'Хадгалж байна...'}
+  try{
+    const {data, error} = await db.auth.updateUser({
+      data: { full_name: name, phone: phone||'' }
+    });
+    if(error) throw error;
+    currentUser = data.user;
+    toast('Профайл шинэчлэгдлээ');
+    router();
+  }catch(e){
+    toast('Алдаа: ' + e.message, 'error');
+  }finally{
+    if(btn){btn.disabled = false; btn.textContent = 'Хадгалах'}
+  }
+}
+
+// ============ COUPONS ============
+async function applyCoupon(subtotal){
+  const code = (document.getElementById('coupon-code')?.value||'').trim().toUpperCase();
+  if(!code){toast('Купон код бичнэ үү', 'error'); return}
+  if(!db){toast('Купон шалгах боломжгүй', 'error'); return}
+  try{
+    const {data, error} = await db.rpc('preview_coupon', {p_code: code, p_subtotal: subtotal});
+    if(error) throw error;
+    if(!data || !data.valid){
+      toast(data?.error || 'Купон код буруу', 'error');
+      sessionStorage.removeItem('coupon_preview');
+      sessionStorage.removeItem('active_coupon');
+      return;
+    }
+    sessionStorage.setItem('coupon_preview', JSON.stringify(data));
+    sessionStorage.setItem('active_coupon', data.code);
+    toast(`Купон хэрэглэгдлээ: -${fmt(data.discount)}`);
+    router();
+  }catch(e){
+    toast('Алдаа: ' + e.message, 'error');
+  }
+}
+
+function clearCoupon(){
+  sessionStorage.removeItem('coupon_preview');
+  sessionStorage.removeItem('active_coupon');
+  toast('Купон цуцлагдлаа', 'warn');
+  router();
+}
+
+window.authSignUp = authSignUp;
+window.authSignIn = authSignIn;
+window.authSignOut = authSignOut;
+window.authResetPassword = authResetPassword;
+window.authUpdateProfile = authUpdateProfile;
+window.applyCoupon = applyCoupon;
+window.clearCoupon = clearCoupon;
+
+function toggleWishlist(id){
+  const idx = state.wishlist.indexOf(id);
+  if(idx>=0){
+    state.wishlist.splice(idx,1);
+    toast('Хадгалснаас хасагдлаа', 'warn');
+  }else{
+    state.wishlist.push(id);
+    toast('❤ Хадгалсанд нэмэгдлээ');
+  }
+  saveState();
+  updateHeader();
+  if(location.hash==='#/wishlist') router();
+  $$('.wishlist-btn[data-id="'+id+'"]').forEach(b=>{
+    b.classList.toggle('active', state.wishlist.includes(id));
+  });
+}
+
+// ============ TEMPLATES ============
+function starsHtml(rating){
+  const r = Math.max(0, Math.min(5, Number(rating)||0));
+  const full = Math.floor(r);
+  const half = (r - full) >= 0.5;
+  let s = '★'.repeat(full);
+  if(half) s += '⯨';
+  s += '☆'.repeat(5 - full - (half?1:0));
+  return s;
+}
+
+function productImage(p, big=false){
+  if(p.imageUrl){
+    return `<img src="${escapeHtml(p.imageUrl)}" alt="${escapeHtml(p.name)}" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.style.display='none';this.parentNode.appendChild(document.createTextNode('${escapeHtml(p.img)}'))">`;
+  }
+  return escapeHtml(p.img);
+}
+
+function productCard(p){
+  const inWish = state.wishlist.includes(p.id);
+  const reviewCount = p.reviewCount || 0;
+  return `
+    <div class="product">
+      <div class="product-img" onclick="app.go('#/product/${p.id}')">
+        ${p.badge?`<span class="product-badge ${p.badge.includes('%')?'discount':(p.badge==='NEW'?'new':'hot')}">${escapeHtml(p.badge)}</span>`:''}
+        ${p.stock<=0?'<span class="product-badge" style="background:var(--accent);color:#fff;top:auto;bottom:10px;left:10px">ДУУССАН</span>':''}
+        <div class="product-actions" onclick="event.stopPropagation()">
+          <button class="wishlist-btn ${inWish?'active':''}" data-id="${p.id}" onclick="toggleWishlist('${p.id}')" title="Хадгалах">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </button>
+          <button onclick="app.go('#/product/${p.id}')" title="Дэлгэрэнгүй">
+            <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        ${productImage(p)}
+      </div>
+      <div class="product-info">
+        <span class="product-cat">${escapeHtml(p.catName)} · ${escapeHtml(p.brand)}</span>
+        <h4 onclick="app.go('#/product/${p.id}')">${escapeHtml(p.name)}</h4>
+        <div class="product-rating"><span class="stars">${starsHtml(p.rating)}</span> ${p.rating.toFixed(1)}${reviewCount?` <span style="color:var(--muted)">(${reviewCount})</span>`:''}</div>
+        <div class="product-price">
+          <span class="now">${fmt(p.price)}</span>
+          ${p.old?`<span class="was">${fmt(p.old)}</span>`:''}
+        </div>
+        <button class="add-cart" onclick="addToCart('${p.id}')" ${p.stock<=0?'disabled style="opacity:.5;cursor:not-allowed"':''}>
+          <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          ${p.stock<=0?'Дууссан':'Сагсанд'}
+        </button>
+      </div>
+    </div>`;
+}
+
+// ============ PAGES ============
+function pageHome(){
+  const newProducts = PRODUCTS.filter(p=>p.badge==='NEW').slice(0,10);
+  const saleProducts = PRODUCTS.filter(p=>p.old>0).slice(0,10);
+  const hotProducts = PRODUCTS.filter(p=>p.badge==='HOT').slice(0,10);
+  const dealProducts = saleProducts.slice(0,4);
+
+  return `
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-main">
+            <div class="hero-bg-text">RTX 50</div>
+            <div class="hero-content">
+              <div class="hero-tag">Drop 03 · RTX 5080 LIVE</div>
+              <h1>Шинэ <span class="accent">GPU</span><br><span class="strike">5070</span> 5080.</h1>
+              <p>16GB GDDR7. 4K@240FPS. DLSS 4. Underground market-ийн хамгийн хүчтэй карт одоо бэлэн.</p>
+              <div class="hero-cta-row">
+                <a class="btn btn-primary" href="#/product/p1">Худалдан авах →</a>
+                <a class="btn btn-outline" href="#/category/gpu">Бүгдийг үзэх</a>
+              </div>
+            </div>
+          </div>
+          <div class="hero-side">
+            <div class="hero-card c1" onclick="app.go('#/product/p24')">
+              <div>
+                <div class="tag">// PS5 PRO</div>
+                <h3>PlayStation 5 Pro</h3>
+                <div class="price">Зөвхөн <strong>2,400,000₮</strong></div>
+              </div>
+              <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            </div>
+            <div class="hero-card c2" onclick="app.go('#/product/p13')">
+              <div>
+                <div class="tag">// -20% MONITOR</div>
+                <h3>Acer Nitro 27" 100Hz</h3>
+                <div class="price">Хямдрал <strong>320,000₮</strong></div>
+              </div>
+              <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat"><div class="stat-icon">🚚</div><div class="stat-text"><strong>Үнэгүй хүргэлт</strong><span>100,000₮+ захиалгад</span></div></div>
+          <div class="stat"><div class="stat-icon">🔧</div><div class="stat-text"><strong>Үнэгүй угсралт</strong><span>5 саяас дээш</span></div></div>
+          <div class="stat"><div class="stat-icon">🛡️</div><div class="stat-text"><strong>2+ жил баталгаа</strong><span>Албан ёсны</span></div></div>
+          <div class="stat"><div class="stat-icon">💳</div><div class="stat-text"><strong>Лизинг</strong><span>24 хүртэл сар</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title"><span class="num">/01</span> Ангилал <span class="sub">// shop by category</span></h2>
+          <a href="#/shop" class="section-link">Бүгд</a>
+        </div>
+        <div class="cat-grid">
+          ${CATEGORIES.slice(0,18).map(c=>`
+            <a href="#/category/${c.id}" class="cat-item">
+              <div class="cat-icon">${c.icon}</div>
+              <span>${c.name}</span>
+            </a>`).join('')}
+        </div>
+      </div>
+    </section>
+
+    <!-- NEW PRODUCTS WITH TABS -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title"><span class="num">/02</span> Бүтээгдэхүүн <span class="sub">// curated drop</span></h2>
+          <a href="#/shop" class="section-link">Бүгд</a>
+        </div>
+        <div class="tabs">
+          <button class="tab active" data-tab="new">// Шинэ</button>
+          <button class="tab" data-tab="sale">// Хямдрал</button>
+          <button class="tab" data-tab="hot">// Хит</button>
+        </div>
+        <div class="product-grid" id="home-products"></div>
+      </div>
+    </section>
+
+    <!-- DEAL OF DAY -->
+    <section class="section">
+      <div class="container">
+        <div class="deal-banner">
+          <div class="deal-info">
+            <div class="eyebrow">Drop 03 · Live now</div>
+            <h2>RTX 5070 на<br><span>-7% OFF</span></h2>
+            <p>Хязгаарлагдмал агшинд RTX 5070 GPU-нуудад тусгай хямдрал. Дуусахаас өмнө аваарай!</p>
+            <div class="countdown" id="countdown">
+              <div class="count-box"><span class="count-num" id="cd-d">02</span><span class="count-label">Өдөр</span></div>
+              <div class="count-box"><span class="count-num" id="cd-h">14</span><span class="count-label">Цаг</span></div>
+              <div class="count-box"><span class="count-num" id="cd-m">36</span><span class="count-label">Мин</span></div>
+              <div class="count-box"><span class="count-num" id="cd-s">52</span><span class="count-label">Сек</span></div>
+            </div>
+            <a class="btn btn-danger" href="#/shop?sort=discount">Хямдрал үзэх →</a>
+          </div>
+          <div class="deal-products">
+            ${dealProducts.map(p=>productCard(p)).join('')}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOT BUILDS -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title"><span class="num">/03</span> Бэлэн сэтап <span class="sub">// pre-built bundles</span></h2>
+          <a href="#/category/setup" class="section-link">Бүгд</a>
+        </div>
+        <div class="product-grid cols-4">
+          ${(function(){
+            const setups = PRODUCTS.filter(p=>p.cat==='setup');
+            const extra = PRODUCTS.find(p=>p.cat==='laptop' && p.badge==='HOT') || PRODUCTS.find(p=>p.cat==='laptop');
+            return setups.concat(extra?[extra]:[]).map(p=>productCard(p)).join('');
+          })()}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function pageShop(){
+  const params = new URLSearchParams(location.hash.split('?')[1]||'');
+  const cat = params.get('cat') || 'all';
+  const search = params.get('q') || '';
+  const sort = params.get('sort') || 'default';
+  const minPrice = parseInt(params.get('min')||'0');
+  const maxPrice = parseInt(params.get('max')||'20000000');
+  const brand = params.get('brand') || '';
+
+  let filtered = PRODUCTS.slice();
+  if(cat!=='all') filtered = filtered.filter(p=>p.cat===cat);
+  if(search){
+    const q = search.toLowerCase().trim();
+    filtered = filtered.filter(p =>
+      p.name.toLowerCase().includes(q) ||
+      p.brand.toLowerCase().includes(q) ||
+      (p.catName||'').toLowerCase().includes(q) ||
+      (p.desc||'').toLowerCase().includes(q) ||
+      Object.values(p.specs||{}).some(v => String(v).toLowerCase().includes(q))
+    );
+  }
+  filtered = filtered.filter(p=>p.price>=minPrice && p.price<=maxPrice);
+  if(brand) filtered = filtered.filter(p=>p.brand===brand);
+
+  if(sort==='price-asc') filtered.sort((a,b)=>a.price-b.price);
+  else if(sort==='price-desc') filtered.sort((a,b)=>b.price-a.price);
+  else if(sort==='name') filtered.sort((a,b)=>a.name.localeCompare(b.name));
+  else if(sort==='rating') filtered.sort((a,b)=>b.rating-a.rating);
+  else if(sort==='discount') filtered.sort((a,b)=>{
+    const dA = a.old ? (a.old-a.price)/a.old : 0;
+    const dB = b.old ? (b.old-b.price)/b.old : 0;
+    return dB - dA;
+  });
+
+  const catCounts = {};
+  CATEGORIES.forEach(c => catCounts[c.id] = PRODUCTS.filter(p=>p.cat===c.id).length);
+
+  return `
+    <div class="breadcrumb">
+      <div class="container">
+        <a href="#/">Нүүр</a><span class="sep">/</span><a href="#/shop">Дэлгүүр</a>${cat!=='all'?`<span class="sep">/</span><span>${escapeHtml((CATEGORIES.find(c=>c.id===cat)||{}).name||cat)}</span>`:''}
+      </div>
+    </div>
+    <div class="container">
+      <div class="shop-layout">
+        <aside class="filter-sidebar">
+          <div class="filter-block">
+            <h5>Ангилал</h5>
+            <ul class="filter-list">
+              <li><label><input type="radio" name="fcat" value="all" ${cat==='all'?'checked':''} onchange="app.applyFilter({cat:'all'})"> Бүх ангилал <span class="count">${PRODUCTS.length}</span></label></li>
+              ${CATEGORIES.filter(c=>catCounts[c.id]>0).map(c=>`
+                <li><label><input type="radio" name="fcat" value="${c.id}" ${cat===c.id?'checked':''} onchange="app.applyFilter({cat:'${c.id}'})"> ${c.name} <span class="count">${catCounts[c.id]}</span></label></li>
+              `).join('')}
+            </ul>
+          </div>
+          <div class="filter-block">
+            <h5>Үнийн хязгаар</h5>
+            <input type="range" class="price-slider" min="0" max="20000000" step="100000" value="${maxPrice}" oninput="app.applyFilter({max:this.value})">
+            <div class="price-range">
+              <input type="number" placeholder="0" value="${minPrice||''}" onchange="app.applyFilter({min:this.value||0})">
+              <input type="number" placeholder="20,000,000" value="${maxPrice!==20000000?maxPrice:''}" onchange="app.applyFilter({max:this.value||20000000})">
+            </div>
+          </div>
+          <div class="filter-block">
+            <h5>Брэнд</h5>
+            <ul class="filter-list">
+              <li><label><input type="radio" name="fbrand" value="" ${!brand?'checked':''} onchange="app.applyFilter({brand:''})"> Бүгд</label></li>
+              ${BRANDS.filter(b=>PRODUCTS.some(p=>p.brand===b)).map(b=>`
+                <li><label><input type="radio" name="fbrand" value="${b}" ${brand===b?'checked':''} onchange="app.applyFilter({brand:'${b}'})"> ${b} <span class="count">${PRODUCTS.filter(p=>p.brand===b).length}</span></label></li>
+              `).join('')}
+            </ul>
+          </div>
+        </aside>
+        <div class="shop-main">
+          <div class="shop-toolbar">
+            <div class="info">// ${filtered.length} <strong>бүтээгдэхүүн</strong>${search?` // хайсан: "${escapeHtml(search)}"`:''}</div>
+            <div class="controls">
+              <select onchange="app.applyFilter({sort:this.value})">
+                <option value="default" ${sort==='default'?'selected':''}>Шинээр</option>
+                <option value="price-asc" ${sort==='price-asc'?'selected':''}>Үнэ: бага → их</option>
+                <option value="price-desc" ${sort==='price-desc'?'selected':''}>Үнэ: их → бага</option>
+                <option value="name" ${sort==='name'?'selected':''}>Нэр</option>
+                <option value="rating" ${sort==='rating'?'selected':''}>Үнэлгээ</option>
+                <option value="discount" ${sort==='discount'?'selected':''}>Хямдрал</option>
+              </select>
+              ${cat!=='all'||search||brand||minPrice||maxPrice!==20000000?'<button class="btn btn-ghost" onclick="app.go(\'#/shop\')">× Шүүлтийг арилгах</button>':''}
+            </div>
+          </div>
+          ${filtered.length===0 ? `
+            <div class="empty-state">
+              <div class="icon">🔍</div>
+              <h2>Илэрц олдсонгүй</h2>
+              <p>Хайлтын шүүлтийг өөрчилж дахин оролдоно уу.</p>
+              <a class="btn btn-primary" href="#/shop">Бүх бүтээгдэхүүн</a>
+            </div>` : `
+            <div class="product-grid cols-4">${filtered.map(p=>productCard(p)).join('')}</div>
+          `}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function pageProduct(id){
+  const p = findProduct(id);
+  if(!p) return pageNotFound();
+  const inWish = state.wishlist.includes(p.id);
+  const related = PRODUCTS.filter(x=>x.cat===p.cat && x.id!==p.id).slice(0,5);
+
+  return `
+    <div class="breadcrumb">
+      <div class="container">
+        <a href="#/">Нүүр</a><span class="sep">/</span>
+        <a href="#/shop">Дэлгүүр</a><span class="sep">/</span>
+        <a href="#/category/${p.cat}">${escapeHtml(p.catName)}</a><span class="sep">/</span>
+        <span>${escapeHtml(p.name)}</span>
+      </div>
+    </div>
+    <div class="container product-detail">
+      <div class="pd-grid">
+        <div class="pd-gallery">
+          <div class="pd-main-img" id="pd-main-img" style="${p.imageUrl?'padding:0;font-size:0':''}">${p.imageUrl?`<img src="${escapeHtml(p.imageUrl)}" alt="${escapeHtml(p.name)}" style="width:100%;height:100%;object-fit:cover">`:escapeHtml(p.img)}</div>
+          <div class="pd-thumbs">
+            ${[p.img,'⚙️','📐','🔍','📷'].map((ic,i)=>`<div class="pd-thumb ${i===0?'active':''}" onclick="document.querySelectorAll('.pd-thumb').forEach(t=>t.classList.remove('active'));this.classList.add('active');document.getElementById('pd-main-img').textContent=this.textContent">${escapeHtml(ic)}</div>`).join('')}
+          </div>
+        </div>
+        <div class="pd-info">
+          <div class="pd-cat">${escapeHtml(p.catName)} · ${escapeHtml(p.brand)}</div>
+          <h1>${escapeHtml(p.name)}</h1>
+          <div class="pd-meta">
+            <div class="pd-rating"><span class="stars">${starsHtml(p.rating)}</span> ${p.rating.toFixed(1)} (${p.reviewCount||0} сэтгэгдэл)</div>
+            <span class="pd-sku">SKU: ${escapeHtml(String(p.id).toUpperCase())}</span>
+          </div>
+          <div class="pd-price-row">
+            <span class="pd-price">${fmt(p.price)}</span>
+            ${p.old?`<span class="pd-price-was">${fmt(p.old)}</span><span class="pd-save">-${Math.round((p.old-p.price)/p.old*100)}%</span>`:''}
+          </div>
+          <p class="pd-desc">${escapeHtml(p.desc)}</p>
+          <div class="pd-stock">${p.stock>5?'Бэлэн байгаа':p.stock>0?`Зөвхөн ${p.stock} үлдсэн!`:'Дууссан'} // Хүргэлт 1-2 хоног</div>
+          <div class="pd-specs">
+            <h4>// Үндсэн үзүүлэлтүүд</h4>
+            <ul class="pd-specs-list">
+              ${Object.entries(p.specs).map(([k,v])=>`<li><span>${escapeHtml(k)}</span><span>${escapeHtml(v)}</span></li>`).join('')}
+            </ul>
+          </div>
+          <div class="pd-actions">
+            <div class="qty-control">
+              <button onclick="this.nextElementSibling.value=Math.max(1,parseInt(this.nextElementSibling.value||1)-1)">−</button>
+              <input type="number" id="pd-qty" value="1" min="1" max="${p.stock}">
+              <button onclick="this.previousElementSibling.value=Math.min(${p.stock},parseInt(this.previousElementSibling.value||1)+1)">+</button>
+            </div>
+            <button class="btn btn-primary" onclick="addToCart('${p.id}', parseInt(document.getElementById('pd-qty').value)||1)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+              Сагсанд нэмэх
+            </button>
+          </div>
+          <div class="pd-extra">
+            <button class="wishlist-btn ${inWish?'active':''}" data-id="${p.id}" onclick="toggleWishlist('${p.id}')">
+              <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              ${inWish?'Хадгалснаас хасах':'Хадгалах'}
+            </button>
+            <button onclick="addToCart('${p.id}', parseInt(document.getElementById('pd-qty').value)||1); app.go('#/checkout')">
+              <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              Шууд авах
+            </button>
+          </div>
+          <div class="pd-info-grid">
+            <div class="pd-info-row">
+              <div class="contact-item"><div class="ic">🚚</div></div>
+              <div><strong>Үнэгүй хүргэлт</strong>УБ хотын дотор 1-2 хоног</div>
+            </div>
+            <div class="pd-info-row">
+              <div class="contact-item"><div class="ic">🛡️</div></div>
+              <div><strong>Албан баталгаа</strong>2 жилийн баталгаатай</div>
+            </div>
+            <div class="pd-info-row">
+              <div class="contact-item"><div class="ic">↩️</div></div>
+              <div><strong>14 хоног</strong>Буцаах боломжтой</div>
+            </div>
+            <div class="pd-info-row">
+              <div class="contact-item"><div class="ic">💳</div></div>
+              <div><strong>Лизинг</strong>24 сар хүртэл</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REVIEWS -->
+      <section class="section" style="padding:64px 0 0" id="reviews-section">
+        <div class="section-head">
+          <h2 class="section-title"><span class="num">/04</span> Сэтгэгдэл <span class="sub">// reviews</span></h2>
+        </div>
+        <div id="reviews-body" style="color:var(--muted);font-family:'JetBrains Mono';font-size:12px;letter-spacing:1px">Ачаалж байна...</div>
+      </section>
+
+      <!-- RELATED -->
+      <section class="section" style="padding:64px 0 0">
+        <div class="section-head">
+          <h2 class="section-title"><span class="num">/05</span> Холбоотой <span class="sub">// related products</span></h2>
+        </div>
+        <div class="product-grid">${related.map(rp=>productCard(rp)).join('')}</div>
+      </section>
+    </div>
+  `;
+}
+
+async function loadProductReviews(productId){
+  const body = document.getElementById('reviews-body');
+  if(!body) return;
+  if(!db){
+    body.innerHTML = '// Supabase холбогдоогүй';
+    return;
+  }
+  try{
+    const {data, error} = await db.from('reviews')
+      .select('id, user_id, user_name, rating, comment, created_at')
+      .eq('product_id', productId)
+      .order('created_at', {ascending:false});
+    if(error) throw error;
+
+    const myReview = currentUser ? (data||[]).find(r => r.user_id === currentUser.id) : null;
+    const reviews = data||[];
+
+    const formHtml = currentUser ? `
+      <div class="checkout-section" style="margin-bottom:20px">
+        <h3 style="font-size:18px;margin-bottom:14px">${myReview?'Өөрийн сэтгэгдэл':'Сэтгэгдэл бичих'}</h3>
+        <form onsubmit="event.preventDefault();submitReview('${escapeHtml(productId)}')">
+          <div style="display:flex;gap:6px;font-size:28px;margin-bottom:12px;cursor:pointer" id="rv-stars">
+            ${[1,2,3,4,5].map(n=>`<span data-r="${n}" onclick="setReviewRating(${n})" style="color:${myReview && myReview.rating>=n?'var(--gold)':'var(--line-2)'}">★</span>`).join('')}
+          </div>
+          <textarea id="rv-comment" placeholder="Барааны талаарх сэтгэгдэл..." style="width:100%;min-height:80px;padding:12px;background:var(--bg-2);border:1px solid var(--line-2);border-radius:6px;color:var(--text);resize:vertical">${escapeHtml(myReview?.comment||'')}</textarea>
+          <input type="hidden" id="rv-rating" value="${myReview?.rating||5}">
+          <div style="display:flex;gap:10px;margin-top:12px">
+            <button class="btn btn-primary" type="submit">${myReview?'Шинэчлэх':'Илгээх'}</button>
+            ${myReview?`<button class="btn btn-outline" type="button" onclick="deleteReview('${myReview.id}','${escapeHtml(productId)}')">Устгах</button>`:''}
+          </div>
+        </form>
+      </div>
+    ` : `
+      <div class="checkout-section" style="margin-bottom:20px;text-align:center">
+        Сэтгэгдэл бичихийн тулд <a href="#/account" style="color:var(--primary)">нэвтэрнэ үү</a>
+      </div>
+    `;
+
+    const listHtml = reviews.length===0
+      ? '<div style="text-align:center;padding:24px;color:var(--muted)">// Сэтгэгдэл байхгүй байна. Эхний сэтгэгдлийг та бичээрэй!</div>'
+      : reviews.map(r=>`
+        <div style="background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;margin-bottom:10px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <div>
+              <strong style="font-family:Manrope">${escapeHtml(r.user_name||'Зочин')}</strong>
+              <span style="font-family:'JetBrains Mono';font-size:11px;color:var(--muted);margin-left:8px">${escapeHtml(new Date(r.created_at).toLocaleDateString('mn-MN'))}</span>
+            </div>
+            <span class="stars" style="color:var(--gold);font-size:14px">${starsHtml(r.rating)}</span>
+          </div>
+          ${r.comment?`<p style="color:var(--muted-2);font-size:13px;line-height:1.6;white-space:pre-wrap">${escapeHtml(r.comment)}</p>`:''}
+        </div>
+      `).join('');
+
+    body.innerHTML = formHtml + listHtml;
+  }catch(e){
+    body.textContent = '// Алдаа: ' + e.message;
+  }
+}
+
+function setReviewRating(n){
+  const stars = document.querySelectorAll('#rv-stars span');
+  stars.forEach((s,i)=>{ s.style.color = i<n ? 'var(--gold)' : 'var(--line-2)'; });
+  document.getElementById('rv-rating').value = n;
+}
+
+async function submitReview(productId){
+  if(!db || !currentUser){toast('Эхлээд нэвтэрнэ үү', 'error'); return}
+  const rating = parseInt(document.getElementById('rv-rating').value)||5;
+  const comment = (document.getElementById('rv-comment').value||'').trim();
+  try{
+    const {error} = await db.from('reviews').upsert({
+      product_id: productId,
+      user_id: currentUser.id,
+      user_email: currentUser.email,
+      user_name: currentUser.user_metadata?.full_name || currentUser.email?.split('@')[0] || 'Зочин',
+      rating, comment
+    }, {onConflict: 'user_id,product_id'});
+    if(error) throw error;
+    toast('✓ Сэтгэгдэл хадгалагдлаа');
+    loadProductReviews(productId);
+    if(typeof loadProductsFromSupabase==='function') loadProductsFromSupabase();
+  }catch(e){
+    toast('Алдаа: ' + e.message, 'error');
+  }
+}
+
+async function deleteReview(reviewId, productId){
+  if(!db || !confirm('Сэтгэгдлээ устгах уу?')) return;
+  try{
+    const {error} = await db.from('reviews').delete().eq('id', reviewId);
+    if(error) throw error;
+    toast('Сэтгэгдэл устгагдлаа', 'warn');
+    loadProductReviews(productId);
+  }catch(e){
+    toast('Алдаа: ' + e.message, 'error');
+  }
+}
+window.setReviewRating = setReviewRating;
+window.submitReview = submitReview;
+window.deleteReview = deleteReview;
+
+function pageCart(){
+  if(state.cart.length===0){
+    return `<div class="container cart-page">
+      <h1 style="font-size:48px;margin-bottom:32px">// Таны сагс</h1>
+      <div class="cart-empty">
+        <div class="icon">🛒</div>
+        <h2>Сагс хоосон</h2>
+        <p>Аль ч бүтээгдэхүүн нэмэгдээгүй байна. Дэлгүүрээс үргэлжлүүлнэ үү!</p>
+        <a class="btn btn-primary" href="#/shop">Дэлгүүр рүү буцах</a>
+      </div>
+    </div>`;
+  }
+  const items = state.cart.map(i=>({...i, product:findProduct(i.id)})).filter(x=>x.product);
+  const subtotal = items.reduce((s,i)=>s+i.product.price*i.qty, 0);
+  const shipping = subtotal > 100000 ? 0 : 15000;
+  const coupon = JSON.parse(sessionStorage.getItem('coupon_preview')||'null');
+  const discount = (coupon && coupon.valid) ? Number(coupon.discount) : 0;
+  const total = Math.max(subtotal + shipping - discount, 0);
+
+  return `
+    <div class="breadcrumb"><div class="container"><a href="#/">Нүүр</a><span class="sep">/</span><span>Сагс</span></div></div>
+    <div class="container cart-page">
+      <h1 style="font-size:48px;margin-bottom:32px">// Сагс <span class="mono" style="color:var(--primary);font-size:24px">${items.length}</span></h1>
+      <div class="cart-grid">
+        <div class="cart-items">
+          <div class="cart-header">
+            <div></div><div>Бүтээгдэхүүн</div><div>Үнэ</div><div>Тоо</div><div>Дүн</div><div></div>
+          </div>
+          ${items.map(item=>`
+            <div class="cart-item">
+              <div class="cart-item-img">${escapeHtml(item.product.img)}</div>
+              <div class="cart-item-info">
+                <h4><a href="#/product/${item.product.id}">${escapeHtml(item.product.name)}</a></h4>
+                <div class="cat">${escapeHtml(item.product.catName)} · ${escapeHtml(item.product.brand)}</div>
+              </div>
+              <div class="cart-item-price">${fmt(item.product.price)}</div>
+              <div class="qty-control">
+                <button onclick="updateCartQty('${item.id}', ${item.qty-1}); router()">−</button>
+                <input type="number" value="${item.qty}" min="1" max="${item.product.stock}" onchange="updateCartQty('${item.id}', parseInt(this.value)||1); router()">
+                <button onclick="updateCartQty('${item.id}', ${item.qty+1}); router()">+</button>
+              </div>
+              <div class="cart-item-total">${fmt(item.product.price*item.qty)}</div>
+              <button class="cart-remove" onclick="removeFromCart('${item.id}')">
+                <svg viewBox="0 0 24 24"><path d="M3 6h18M19 6l-2 14H7L5 6m5 0V4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2"/></svg>
+              </button>
+            </div>
+          `).join('')}
+        </div>
+        <div class="cart-summary">
+          <h3>// Захиалга</h3>
+          <div class="summary-row">Бараа (${items.reduce((s,i)=>s+i.qty,0)} ширхэг) <strong>${fmt(subtotal)}</strong></div>
+          <div class="summary-row">Хүргэлт ${shipping===0?'<span style="color:var(--primary);font-family:JetBrains Mono;font-size:11px">// FREE</span>':''} <strong>${fmt(shipping)}</strong></div>
+          ${discount>0 ? `<div class="summary-row" style="color:var(--primary)">Купон ${escapeHtml(coupon.code||'')} <strong style="color:var(--primary)">-${fmt(discount)}</strong></div>` : ''}
+          <div class="coupon">
+            <input type="text" placeholder="Купон код" id="coupon-code" value="${escapeHtml(coupon?.code||'')}" oninput="this.value=this.value.toUpperCase()">
+            ${discount>0
+              ? `<button onclick="clearCoupon()" style="background:var(--accent);color:#fff;border-color:var(--accent)">Цуцлах</button>`
+              : `<button onclick="applyCoupon(${subtotal})">Хэрэглэх</button>`}
+          </div>
+          <div class="summary-row total">Нийт <strong>${fmt(total)}</strong></div>
+          <a class="btn btn-primary" style="width:100%;justify-content:center;margin-top:16px;font-size:14px;height:50px" href="#/checkout">Захиалга өгөх →</a>
+          <a class="btn btn-ghost" style="width:100%;justify-content:center;margin-top:8px" href="#/shop">← Үргэлжлүүлэн хийх</a>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function pageCheckout(){
+  if(state.cart.length===0){
+    location.hash = '#/cart';
+    return '';
+  }
+  const items = state.cart.map(i=>({...i, product:findProduct(i.id)})).filter(x=>x.product);
+  const subtotal = items.reduce((s,i)=>s+i.product.price*i.qty, 0);
+  const shipping = subtotal > 100000 ? 0 : 15000;
+  const total = subtotal + shipping;
+
+  return `
+    <div class="breadcrumb"><div class="container"><a href="#/">Нүүр</a><span class="sep">/</span><a href="#/cart">Сагс</a><span class="sep">/</span><span>Захиалга</span></div></div>
+    <div class="container checkout-page">
+      <h1 style="font-size:48px;margin-bottom:32px">// Захиалга баталгаажуулах</h1>
+      <form id="checkout-form" onsubmit="event.preventDefault();submitOrder()">
+        <div class="checkout-grid">
+          <div>
+            <div class="checkout-section">
+              <h3><span class="step-num">1</span> Холбоо барих${currentUser?` <span style="font-family:'JetBrains Mono';font-size:11px;color:var(--primary);letter-spacing:2px;margin-left:8px">// ${escapeHtml(currentUser.email)}</span>`:''}</h3>
+              <div class="form-grid">
+                <div class="form-field"><label>Овог</label><input name="lastname" required></div>
+                <div class="form-field"><label>Нэр</label><input name="firstname" value="${escapeHtml(currentUser?.user_metadata?.full_name||'')}" required></div>
+                <div class="form-field"><label>Утас</label><input name="phone" type="tel" required pattern="[0-9]{8}" value="${escapeHtml(currentUser?.user_metadata?.phone||'')}"></div>
+                <div class="form-field"><label>И-мэйл</label><input name="email" type="email" required value="${escapeHtml(currentUser?.email||'')}"></div>
+              </div>
+            </div>
+            <div class="checkout-section">
+              <h3><span class="step-num">2</span> Хүргэлтийн хаяг</h3>
+              <div class="form-grid">
+                <div class="form-field"><label>Хот</label><select name="city" required>
+                  <option value="">-- сонгох --</option>
+                  <option>Улаанбаатар</option><option>Дархан</option><option>Эрдэнэт</option><option>Чойбалсан</option>
+                </select></div>
+                <div class="form-field"><label>Дүүрэг</label><select name="district" required>
+                  <option value="">-- сонгох --</option>
+                  <option>Сүхбаатар</option><option>Чингэлтэй</option><option>Баянгол</option><option>Хан-Уул</option><option>Сонгино-Хайрхан</option><option>Баянзүрх</option>
+                </select></div>
+              </div>
+              <div class="form-grid full" style="margin-top:14px">
+                <div class="form-field"><label>Дэлгэрэнгүй хаяг</label><textarea name="address" placeholder="Хороо, байр, тоот..." required></textarea></div>
+              </div>
+            </div>
+            <div class="checkout-section">
+              <h3><span class="step-num">3</span> Төлбөрийн хэлбэр</h3>
+              <div class="payment-options">
+                <div class="pay-option active" onclick="document.querySelectorAll('.pay-option').forEach(o=>o.classList.remove('active'));this.classList.add('active')">
+                  <div class="pay-icon">💳</div>
+                  <div>Карт</div>
+                  <small>Visa/MC/UPay</small>
+                </div>
+                <div class="pay-option" onclick="document.querySelectorAll('.pay-option').forEach(o=>o.classList.remove('active'));this.classList.add('active')">
+                  <div class="pay-icon">🏦</div>
+                  <div>QPay</div>
+                  <small>Мобайл банк</small>
+                </div>
+                <div class="pay-option" onclick="document.querySelectorAll('.pay-option').forEach(o=>o.classList.remove('active'));this.classList.add('active')">
+                  <div class="pay-icon">💵</div>
+                  <div>Бэлэн</div>
+                  <small>Хүргэлтийн үед</small>
+                </div>
+              </div>
+            </div>
+            <div class="checkout-section">
+              <h3><span class="step-num">4</span> Нэмэлт мэдээлэл</h3>
+              <div class="form-grid full">
+                <div class="form-field"><label>Захиалгад хавсаргах тэмдэглэл (заавал биш)</label><textarea name="note" placeholder="Тусгай хүсэлт..."></textarea></div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="cart-summary" style="position:sticky;top:140px">
+              <h3>// Захиалгын хураангуй</h3>
+              ${items.map(item=>`
+                <div class="summary-row" style="align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--line)">
+                  <div style="display:flex;gap:10px;align-items:center">
+                    <span style="font-size:24px">${escapeHtml(item.product.img)}</span>
+                    <div>
+                      <div style="font-size:12px;color:var(--text);line-height:1.3;max-width:160px">${escapeHtml(item.product.name.substring(0,40))}${item.product.name.length>40?'...':''}</div>
+                      <div style="font-family:JetBrains Mono;font-size:10px;color:var(--muted);margin-top:2px">× ${item.qty}</div>
+                    </div>
+                  </div>
+                  <strong style="font-family:JetBrains Mono">${fmt(item.product.price*item.qty)}</strong>
+                </div>
+              `).join('')}
+              <div class="summary-row" style="margin-top:14px">Дэд дүн <strong>${fmt(subtotal)}</strong></div>
+              <div class="summary-row">Хүргэлт ${shipping===0?'<span style="color:var(--primary);font-family:JetBrains Mono;font-size:11px">// FREE</span>':''} <strong>${fmt(shipping)}</strong></div>
+              <div class="summary-row total">Нийт <strong>${fmt(total)}</strong></div>
+              <button class="btn btn-primary" type="submit" style="width:100%;justify-content:center;margin-top:16px;font-size:14px;height:52px">
+                Захиалга батлах →
+              </button>
+              <div style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px;font-family:JetBrains Mono;letter-spacing:1px">
+                // SSL ХАМГААЛАГДСАН ХОЛБОЛТ
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  `;
+}
+
+async function submitOrder(){
+  const form = document.getElementById('checkout-form');
+  if(!form.checkValidity()){form.reportValidity();return;}
+
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const originalText = submitBtn.innerHTML;
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = 'Илгээж байна...';
+
+  const fd = new FormData(form);
+  const items = state.cart.map(i=>({...i, product:findProduct(i.id)})).filter(x=>x.product);
+  if(items.length === 0){
+    toast('Сагс хоосон', 'error');
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalText;
+    return;
+  }
+
+  const paymentText = document.querySelector('.pay-option.active')?.querySelector('div:nth-child(2)')?.textContent?.toLowerCase() || 'карт';
+  const paymentMap = {'карт':'card','qpay':'qpay','бэлэн':'cash'};
+  const payMethod = paymentMap[paymentText] || 'card';
+
+  const coupon = sessionStorage.getItem('active_coupon') || null;
+
+  if(!db){
+    // Offline mode (Supabase config байхгүй): эх кодын анхдагч өгөгдлөөр демо явуулна
+    const subtotal = items.reduce((s,i)=>s+i.product.price*i.qty, 0);
+    const shipping = subtotal > 100000 ? 0 : 15000;
+    const total = subtotal + shipping;
+    const orderNumber = 'BM-DEMO-' + Date.now().toString(36).toUpperCase();
+    sessionStorage.setItem('last_order', JSON.stringify({
+      id: orderNumber, date: new Date().toISOString(),
+      items: items.map(i=>({name:i.product.name, qty:i.qty, price:i.product.price})),
+      subtotal, shipping, discount: 0, total, dbSaved: false
+    }));
+    clearCart();
+    location.hash = '#/success';
+    return;
+  }
+
+  // Supabase RPC дуудаж атомик захиалга бичнэ
+  try{
+    const {data, error} = await db.rpc('place_order', {
+      p_items: items.map(i=>({id: i.product.id, qty: i.qty})),
+      p_contact: {
+        name: ((fd.get('lastname')||'') + ' ' + (fd.get('firstname')||'')).trim(),
+        phone: fd.get('phone')||'',
+        email: fd.get('email')||'',
+        city: fd.get('city')||'',
+        district: fd.get('district')||'',
+        address: fd.get('address')||'',
+        note: fd.get('note')||'',
+        payment: payMethod
+      },
+      p_coupon: coupon
+    });
+    if(error) throw error;
+    if(!data) throw new Error('Захиалга буцаагдсангүй');
+
+    sessionStorage.setItem('last_order', JSON.stringify({
+      id: data.order_number,
+      date: new Date().toISOString(),
+      items: items.map(i=>({name:i.product.name, qty:i.qty, price:i.product.price})),
+      subtotal: data.subtotal,
+      shipping: data.shipping,
+      discount: data.discount || 0,
+      total: data.total,
+      dbSaved: true
+    }));
+    sessionStorage.removeItem('active_coupon');
+    clearCart();
+    // Stock өөрчлөгдсөн тул шинэчлэх
+    if(typeof loadProductsFromSupabase === 'function') loadProductsFromSupabase();
+    location.hash = '#/success';
+  }catch(e){
+    const msg = (e.message||'').replace(/^.*?: /, '');
+    const friendly = {
+      EMPTY_ORDER: 'Сагс хоосон байна',
+      INVALID_PAYMENT: 'Төлбөрийн хэлбэр буруу',
+      INVALID_QTY: 'Барааны тоо буруу',
+      INVALID_COUPON: 'Купон код буруу эсвэл хугацаа дууссан',
+      NAME_REQUIRED: 'Нэр бөглөнө үү',
+      PHONE_REQUIRED: 'Утас бөглөнө үү',
+      EMAIL_REQUIRED: 'Имэйл бөглөнө үү',
+      CITY_REQUIRED: 'Хот сонгоно уу',
+      ADDRESS_REQUIRED: 'Хаяг бөглөнө үү'
+    };
+    let displayMsg = friendly[msg] || msg;
+    if(msg.startsWith('INSUFFICIENT_STOCK')) displayMsg = 'Нөөц хүрэлцэхгүй: ' + msg.replace('INSUFFICIENT_STOCK: ','');
+    if(msg.startsWith('PRODUCT_NOT_FOUND')) displayMsg = 'Бараа олдсонгүй';
+    if(msg.startsWith('COUPON_MIN_TOTAL')) displayMsg = msg.replace('COUPON_MIN_TOTAL: ','');
+    toast('Алдаа: ' + displayMsg, 'error');
+    console.error('Order submission failed:', e);
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalText;
+  }
+}
+
+function pageSuccess(){
+  const order = JSON.parse(sessionStorage.getItem('last_order')||'null');
+  if(!order){location.hash='#/'; return '';}
+  return `
+    <div class="container success-page">
+      <div class="success-icon">✓</div>
+      <h1>// Захиалга амжилттай!</h1>
+      <p>Танай захиалга бүртгэгдлээ. Бид удахгүй холбоо барих болно. Захиалгын дугаар: <strong style="color:var(--primary);font-family:JetBrains Mono">${order.id}</strong></p>
+      <div class="order-card">
+        <h4>// Захиалгын дэлгэрэнгүй</h4>
+        <div class="row"><span>Захиалгын дугаар</span><strong>${order.id}</strong></div>
+        <div class="row"><span>Огноо</span><strong>${new Date(order.date).toLocaleString('mn-MN')}</strong></div>
+        <div class="row"><span>Барааны тоо</span><strong>${order.items.reduce((s,i)=>s+i.qty,0)} ширхэг</strong></div>
+        <div class="row"><span>Дэд дүн</span><strong>${fmt(order.subtotal)}</strong></div>
+        <div class="row"><span>Хүргэлт</span><strong>${order.shipping===0?'ҮНЭГҮЙ':fmt(order.shipping)}</strong></div>
+        <div class="row"><span>Нийт</span><strong>${fmt(order.total)}</strong></div>
+      </div>
+      <div style="display:flex;gap:12px;justify-content:center">
+        <a class="btn btn-primary" href="#/shop">Үргэлжлүүлэн хийх</a>
+        <a class="btn btn-outline" href="#/">Нүүр хуудас</a>
+      </div>
+    </div>
+  `;
+}
+
+function pageWishlist(){
+  if(state.wishlist.length===0){
+    return `<div class="container wishlist-page">
+      <h1 style="font-size:48px;margin-bottom:32px">// Хадгалсан</h1>
+      <div class="empty-state">
+        <div class="icon">❤️</div>
+        <h2>Хадгалсан зүйл байхгүй</h2>
+        <p>Танд тааламжтай бүтээгдэхүүнийг хадгалаад дараа нь үзэх боломжтой.</p>
+        <a class="btn btn-primary" href="#/shop">Дэлгүүр</a>
+      </div>
+    </div>`;
+  }
+  const items = state.wishlist.map(id=>findProduct(id)).filter(Boolean);
+  return `
+    <div class="breadcrumb"><div class="container"><a href="#/">Нүүр</a><span class="sep">/</span><span>Хадгалсан</span></div></div>
+    <div class="container wishlist-page">
+      <h1 style="font-size:48px;margin-bottom:32px">// Хадгалсан <span class="mono" style="color:var(--primary);font-size:24px">${items.length}</span></h1>
+      <div class="product-grid cols-4">${items.map(p=>productCard(p)).join('')}</div>
+    </div>
+  `;
+}
+
+function pageAccount(){
+  if(currentUser){
+    return pageAccountSignedIn();
+  }
+  return pageAccountAuth();
+}
+
+function pageAccountAuth(){
+  return `
+    <div class="breadcrumb"><div class="container"><a href="#/">Нүүр</a><span class="sep">/</span><span>Профайл</span></div></div>
+    <div class="container" style="padding:32px 0 64px">
+      <h1 style="font-size:48px;margin-bottom:32px">// Хэрэглэгчийн профайл</h1>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:900px">
+        <div class="checkout-section">
+          <h3><span class="step-num">→</span> Нэвтрэх</h3>
+          <form onsubmit="event.preventDefault();authSignIn()">
+            <div class="form-grid full">
+              <div class="form-field"><label>И-мэйл</label><input id="si-email" type="email" autocomplete="email" required></div>
+              <div class="form-field"><label>Нууц үг</label><input id="si-pass" type="password" autocomplete="current-password" required></div>
+            </div>
+            <button id="si-btn" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:16px">Нэвтрэх</button>
+            <div style="text-align:center;margin-top:12px">
+              <a href="#" onclick="event.preventDefault();authResetPassword()" style="font-family:'JetBrains Mono';font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase">// Нууц үг мартсан уу?</a>
+            </div>
+          </form>
+        </div>
+        <div class="checkout-section">
+          <h3><span class="step-num">+</span> Бүртгүүлэх</h3>
+          <form onsubmit="event.preventDefault();authSignUp()">
+            <div class="form-grid full">
+              <div class="form-field"><label>Нэр</label><input id="su-name" autocomplete="name" required></div>
+              <div class="form-field"><label>И-мэйл</label><input id="su-email" type="email" autocomplete="email" required></div>
+              <div class="form-field"><label>Утас</label><input id="su-phone" type="tel" autocomplete="tel" required></div>
+              <div class="form-field"><label>Нууц үг (6+ тэмдэгт)</label><input id="su-pass" type="password" autocomplete="new-password" required minlength="6"></div>
+            </div>
+            <button id="su-btn" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:16px">Бүртгүүлэх</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function pageAccountSignedIn(){
+  const meta = currentUser.user_metadata || {};
+  const initials = (meta.full_name||currentUser.email||'?').trim()[0].toUpperCase();
+  return `
+    <div class="breadcrumb"><div class="container"><a href="#/">Нүүр</a><span class="sep">/</span><span>Профайл</span></div></div>
+    <div class="container" style="padding:32px 0 64px">
+      <h1 style="font-size:48px;margin-bottom:32px">// Тавтай морил</h1>
+      <div style="display:grid;grid-template-columns:280px 1fr;gap:24px;align-items:start">
+        <div class="checkout-section" style="text-align:center">
+          <div style="width:88px;height:88px;border-radius:50%;background:var(--primary);color:#000;display:grid;place-items:center;font-size:36px;font-weight:700;margin:0 auto 14px">${escapeHtml(initials)}</div>
+          <div style="font-size:16px;font-weight:700;margin-bottom:4px;word-break:break-all">${escapeHtml(meta.full_name||currentUser.email||'')}</div>
+          <div style="font-family:'JetBrains Mono';font-size:11px;color:var(--muted);letter-spacing:1px;word-break:break-all">${escapeHtml(currentUser.email||'')}</div>
+          <button class="btn btn-outline" style="width:100%;justify-content:center;margin-top:20px" onclick="authSignOut()">Гарах</button>
+        </div>
+        <div>
+          <div class="checkout-section">
+            <h3><span class="step-num">i</span> Профайл</h3>
+            <form onsubmit="event.preventDefault();authUpdateProfile()">
+              <div class="form-grid">
+                <div class="form-field"><label>Нэр</label><input id="pe-name" value="${escapeHtml(meta.full_name||'')}" required></div>
+                <div class="form-field"><label>Утас</label><input id="pe-phone" value="${escapeHtml(meta.phone||'')}" type="tel"></div>
+                <div class="form-field"><label>И-мэйл (солих боломжгүй)</label><input value="${escapeHtml(currentUser.email||'')}" disabled></div>
+                <div class="form-field"><label>Бүртгэгдсэн</label><input value="${escapeHtml(new Date(currentUser.created_at).toLocaleDateString('mn-MN'))}" disabled></div>
+              </div>
+              <button id="pe-btn" class="btn btn-primary" type="submit" style="margin-top:14px">Хадгалах</button>
+            </form>
+          </div>
+          <div class="checkout-section" style="margin-top:18px">
+            <h3><span class="step-num">→</span> Захиалгууд</h3>
+            <div id="my-orders" style="color:var(--muted);font-family:'JetBrains Mono';font-size:12px;letter-spacing:1px;padding:10px 0">Ачаалж байна...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+async function loadMyOrders(){
+  const el = document.getElementById('my-orders');
+  if(!el || !db || !currentUser) return;
+  try{
+    const {data, error} = await db
+      .from('orders')
+      .select('id,order_number,total,status,created_at')
+      .eq('customer_email', currentUser.email)
+      .order('created_at', {ascending:false})
+      .limit(20);
+    if(error) throw error;
+    if(!data || data.length===0){
+      el.innerHTML = '// Захиалга байхгүй';
+      return;
+    }
+    const STATUS_MN = {pending:'Хүлээгдэж байна',confirmed:'Баталгаажсан',processing:'Боловсруулж байна',shipping:'Хүргэлтэнд',delivered:'Хүргэгдсэн',cancelled:'Цуцлагдсан'};
+    el.innerHTML = `
+      <table style="width:100%;border-collapse:collapse;font-size:13px">
+        <thead>
+          <tr style="color:var(--muted);font-family:'JetBrains Mono';font-size:11px;letter-spacing:1.5px;text-transform:uppercase">
+            <th style="text-align:left;padding:10px 8px;border-bottom:1px solid var(--line)">Дугаар</th>
+            <th style="text-align:left;padding:10px 8px;border-bottom:1px solid var(--line)">Огноо</th>
+            <th style="text-align:right;padding:10px 8px;border-bottom:1px solid var(--line)">Дүн</th>
+            <th style="text-align:left;padding:10px 8px;border-bottom:1px solid var(--line)">Статус</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${data.map(o=>`
+            <tr>
+              <td style="padding:10px 8px;border-bottom:1px solid var(--line);font-family:'JetBrains Mono';color:var(--primary)">${escapeHtml(o.order_number||o.id.substring(0,8))}</td>
+              <td style="padding:10px 8px;border-bottom:1px solid var(--line);color:var(--muted)">${escapeHtml(new Date(o.created_at).toLocaleString('mn-MN'))}</td>
+              <td style="padding:10px 8px;border-bottom:1px solid var(--line);text-align:right;font-family:'JetBrains Mono';font-weight:700">${fmt(o.total)}</td>
+              <td style="padding:10px 8px;border-bottom:1px solid var(--line);font-family:'JetBrains Mono';font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--primary)">${escapeHtml(STATUS_MN[o.status]||o.status)}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `;
+  }catch(e){
+    el.textContent = '// Алдаа: ' + e.message;
+  }
+}
+
+function pageLegal(slug){
+  const docs = {
+    privacy: {
+      title: 'Хувийн мэдээллийн нууцлал',
+      body: `
+        <p>BLACKMARKET LLC ("бид", "манай") нь үйлчлүүлэгчийн хувийн мэдээллийг хувийн нууц хадгалах, хамгаалах үүрэгтэй.</p>
+
+        <h3>// 1. Цуглуулдаг мэдээлэл</h3>
+        <ul>
+          <li>Бүртгэлийн мэдээлэл: нэр, имэйл, утасны дугаар</li>
+          <li>Захиалгын мэдээлэл: хүргэлтийн хаяг, төлбөрийн төрөл</li>
+          <li>Браузерийн нийтлэг мэдээлэл: IP, төхөөрөмжийн төрөл</li>
+        </ul>
+
+        <h3>// 2. Хэрхэн ашиглах</h3>
+        <ul>
+          <li>Захиалга боловсруулах, хүргэлт зохион байгуулах</li>
+          <li>Хэрэглэгчийн үйлчилгээ үзүүлэх</li>
+          <li>Шинэ бараа, хямдралын тухай мэдэгдэх (зөвхөн зөвшөөрөлтэй бол)</li>
+        </ul>
+
+        <h3>// 3. Гуравдагч талд дамжуулах</h3>
+        <p>Бид таны мэдээллийг доорх тохиолдолд гуравдагч талд дамжуулна:</p>
+        <ul>
+          <li>Хүргэлтийн компанид (зөвхөн хаяг, утас)</li>
+          <li>Төлбөрийн системд (банк, QPay)</li>
+          <li>Хууль шаардлагатай тохиолдолд</li>
+        </ul>
+
+        <h3>// 4. Аюулгүй байдал</h3>
+        <p>Бид HTTPS, encryption, RLS (Row-Level Security) ашиглан хувийн мэдээллийг хамгаална. Гэхдээ интернет дамжуулалт 100% хамгаалагдсан гэж баталгаажуулах боломжгүй.</p>
+
+        <h3>// 5. Таны эрх</h3>
+        <ul>
+          <li>Өөрийн мэдээллийг үзэх, засах</li>
+          <li>Устгахыг хүсэх</li>
+          <li>Маркетинг мэдэгдлээс татгалзах</li>
+        </ul>
+
+        <h3>// 6. Холбоо барих</h3>
+        <p>Асуудал гарвал hello@blackmarket.mn хаягаар холбогдоно уу.</p>
+
+        <p style="color:var(--muted);font-size:11px;font-family:'JetBrains Mono';margin-top:32px">// Сүүлд шинэчилсэн: 2026-05-22</p>
+      `
+    },
+    terms: {
+      title: 'Үйлчилгээний нөхцөл',
+      body: `
+        <p>BLACKMARKET сайт болон үйлчилгээг ашиглахдаа дараах нөхцөлийг хүлээн зөвшөөрсөнд тооцно.</p>
+
+        <h3>// 1. Үйлчилгээний хэрэглээ</h3>
+        <ul>
+          <li>16 ба түүнээс дээш насны иргэн ашиглах боломжтой</li>
+          <li>Бусдын нэрээр бүртгэл үүсгэхийг хориглоно</li>
+          <li>Хуурамч мэдээлэл оруулахыг хориглоно</li>
+        </ul>
+
+        <h3>// 2. Захиалга, төлбөр</h3>
+        <ul>
+          <li>Захиалгын дүн нь захиалга өгсөн агшны үнэ</li>
+          <li>Stock хүрэлцэхгүй тохиолдолд бид захиалгыг цуцлах эрхтэй</li>
+          <li>Төлбөр амжилттай бол захиалга баталгаажна</li>
+        </ul>
+
+        <h3>// 3. Хүргэлт</h3>
+        <ul>
+          <li>УБ хотын дотор 1-2 хоног</li>
+          <li>Орон нутаг 3-7 хоног</li>
+          <li>100,000₮+ захиалгад үнэгүй (УБ дотор)</li>
+        </ul>
+
+        <h3>// 4. Буцаалт</h3>
+        <ul>
+          <li>14 хоногийн дотор буцаах эрхтэй (бараа эвдрэлгүй, шошготой бол)</li>
+          <li>Серийн дугаартай бараа (CPU, GPU) — нээгээгүй бол л буцаагдана</li>
+          <li>Цахим контент (тоглоом, лиценз) буцаагдахгүй</li>
+        </ul>
+
+        <h3>// 5. Баталгаа</h3>
+        <p>Бараа бүр албан баталгаатай (ихэвчлэн 2 жил). Үйлдвэрийн дутагдалд бид үнэгүй засвар/солилцоо хийнэ.</p>
+
+        <h3>// 6. Зохиогчийн эрх</h3>
+        <p>Сайт дээрх контент (зураг, текст, дизайн) нь BLACKMARKET LLC-ийн өмч.</p>
+
+        <h3>// 7. Хариуцлагын хязгаар</h3>
+        <p>Серверийн саатал, гадны халдлагаас үүдсэн алдагдлыг бид хариуцахгүй.</p>
+
+        <p style="color:var(--muted);font-size:11px;font-family:'JetBrains Mono';margin-top:32px">// Сүүлд шинэчилсэн: 2026-05-22</p>
+      `
+    },
+    returns: {
+      title: 'Буцаалт, баталгааны нөхцөл',
+      body: `
+        <h3>// Буцаалт</h3>
+        <p>Бид <strong>14 хоногийн</strong> дотор буцаалт хүлээн авна. Бараа эвдрээгүй, шошго, баглаагаа хадгалсан байх ёстой.</p>
+
+        <h3>// Хэрхэн буцаах</h3>
+        <ol style="padding-left:20px;color:var(--muted-2);line-height:2">
+          <li>hello@blackmarket.mn хаягаар захиалгын дугаараа илгээх</li>
+          <li>Бид хариу имэйлэх (24 цагийн дотор)</li>
+          <li>Үнэ буцаах төлбөрийн дансаа илгээх</li>
+          <li>Бараа авч ирэхэд шалгаж 3 ажлын өдөрт мөнгө буцаана</li>
+        </ol>
+
+        <h3>// Баталгаа</h3>
+        <ul>
+          <li>GPU, CPU: 2 жил албан баталгаатай</li>
+          <li>SSD, RAM: 5 жил (Samsung, Corsair)</li>
+          <li>PSU: 7-10 жил</li>
+          <li>Дэлгэц: 2 жил</li>
+        </ul>
+
+        <h3>// Үнэгүй угсралт</h3>
+        <p><strong>5,000,000₮+</strong> захиалгад үнэгүй компьютер угсралт + үнэгүй хүргэлт.</p>
+
+        <p style="color:var(--muted);font-size:11px;font-family:'JetBrains Mono';margin-top:32px">// Сүүлд шинэчилсэн: 2026-05-22</p>
+      `
+    }
+  };
+
+  const doc = docs[slug] || docs.privacy;
+  return `
+    <div class="breadcrumb"><div class="container"><a href="#/">Нүүр</a><span class="sep">/</span><span>${escapeHtml(doc.title)}</span></div></div>
+    <div class="container" style="padding:32px 0 64px;max-width:820px">
+      <h1 style="font-size:56px;margin-bottom:24px;letter-spacing:0">// ${escapeHtml(doc.title)}</h1>
+      <div style="color:var(--muted-2);line-height:1.8;font-size:15px">${doc.body}</div>
+    </div>
+  `;
+}
+
+function pageNotFound(){
+  return `
+    <div class="container" style="padding:120px 0;text-align:center">
+      <div style="font-family:'JetBrains Mono';font-size:11px;color:var(--accent);letter-spacing:3px;margin-bottom:14px">// ERROR 404</div>
+      <h1 style="font-size:120px;line-height:1">Олдсонгүй</h1>
+      <p style="color:var(--muted);margin:20px 0 32px">Энэ хуудас байхгүй эсвэл устгагдсан байна.</p>
+      <a class="btn btn-primary" href="#/">← Нүүр хуудас</a>
+    </div>
+  `;
+}
+
+// ============ ROUTER ============
+const app = {
+  go(hash){location.hash = hash; window.scrollTo(0,0)},
+  applyFilter(updates){
+    const params = new URLSearchParams(location.hash.split('?')[1]||'');
+    Object.entries(updates).forEach(([k,v])=>{
+      if(v===''||v===null||v===undefined) params.delete(k);
+      else params.set(k,v);
+    });
+    location.hash = '#/shop?' + params.toString();
+  },
+  search(q){
+    if(!q.trim()) return;
+    location.hash = '#/shop?q=' + encodeURIComponent(q.trim());
+    document.getElementById('search-input').value = '';
+  }
+};
+window.app = app;
+
+function router(){
+  const hash = location.hash || '#/';
+  const [path, qs] = hash.split('?');
+  const parts = path.replace('#/','').split('/').filter(Boolean);
+  const root = parts[0] || '';
+  const param = parts[1];
+
+  $$('.nav-menu a').forEach(a=>a.classList.remove('active'));
+  const navActive = $(`.nav-menu a[href="${path}"]`);
+  if(navActive) navActive.classList.add('active');
+
+  let html = '';
+  if(root==='') html = pageHome();
+  else if(root==='shop') html = pageShop();
+  else if(root==='category'){
+    history.replaceState(null, '', '#/shop?cat=' + (param||'all'));
+    html = pageShop();
+  }
+  else if(root==='product') html = pageProduct(param);
+  else if(root==='cart') html = pageCart();
+  else if(root==='checkout') html = pageCheckout();
+  else if(root==='success') html = pageSuccess();
+  else if(root==='wishlist') html = pageWishlist();
+  else if(root==='account') html = pageAccount();
+  else if(root==='legal') html = pageLegal(param);
+  else html = pageNotFound();
+
+  $('#app').innerHTML = html;
+
+  // post-render
+  if(root===''){
+    setupHomeTabs();
+    setupCountdown();
+  }
+  if(root==='account' && currentUser){
+    loadMyOrders();
+  }
+  if(root==='product' && param){
+    loadProductReviews(param);
+    pushRecentlyViewed(param);
+  }
+  document.getElementById('nav-menu').classList.remove('open');
+}
+
+// ============ RECENTLY VIEWED ============
+function pushRecentlyViewed(productId){
+  try{
+    const arr = JSON.parse(localStorage.getItem('recent_viewed')||'[]');
+    const filtered = arr.filter(id => id !== productId);
+    filtered.unshift(productId);
+    localStorage.setItem('recent_viewed', JSON.stringify(filtered.slice(0, 10)));
+  }catch(e){}
+}
+
+function getRecentlyViewed(excludeId){
+  try{
+    const arr = JSON.parse(localStorage.getItem('recent_viewed')||'[]');
+    return arr.filter(id => id !== excludeId).map(findProduct).filter(Boolean).slice(0, 5);
+  }catch(e){ return []; }
+}
+
+function setupHomeTabs(){
+  const newProducts = PRODUCTS.filter(p=>p.badge==='NEW').slice(0,10);
+  const saleProducts = PRODUCTS.filter(p=>p.old>0).slice(0,10);
+  const hotProducts = PRODUCTS.filter(p=>p.badge==='HOT').slice(0,10);
+  const grid = $('#home-products');
+  if(grid) grid.innerHTML = newProducts.map(p=>productCard(p)).join('');
+  $$('.tab').forEach(t=>{
+    t.addEventListener('click',()=>{
+      $$('.tab').forEach(x=>x.classList.remove('active'));
+      t.classList.add('active');
+      const key = t.dataset.tab;
+      const map = {new:newProducts, sale:saleProducts, hot:hotProducts};
+      grid.innerHTML = map[key].map(p=>productCard(p)).join('');
+    });
+  });
+}
+
+let cdInterval;
+let promotionEndAt = null; // ISO string эсвэл null
+
+async function setupCountdown(){
+  if(cdInterval) clearInterval(cdInterval);
+
+  // DB-ээс хамгийн идэвхтэй промог татах оролдлого
+  if(db && !promotionEndAt){
+    try{
+      const {data} = await db.from('promotions')
+        .select('ends_at')
+        .eq('active', true)
+        .gt('ends_at', new Date().toISOString())
+        .order('ends_at', {ascending: true})
+        .limit(1)
+        .maybeSingle();
+      if(data) promotionEndAt = data.ends_at;
+    }catch(e){}
+  }
+
+  const endTime = promotionEndAt ? new Date(promotionEndAt).getTime() : (Date.now() + (2*86400 + 14*3600)*1000);
+
+  const update = ()=>{
+    const diff = Math.max(0, Math.floor((endTime - Date.now())/1000));
+    const d = Math.floor(diff/86400);
+    const h = Math.floor((diff%86400)/3600);
+    const m = Math.floor((diff%3600)/60);
+    const s = diff%60;
+    const dEl = $('#cd-d'), hEl = $('#cd-h'), mEl = $('#cd-m'), sEl = $('#cd-s');
+    if(!dEl) return;
+    dEl.textContent = String(d).padStart(2,'0');
+    hEl.textContent = String(h).padStart(2,'0');
+    mEl.textContent = String(m).padStart(2,'0');
+    sEl.textContent = String(s).padStart(2,'0');
+    if(diff===0 && cdInterval){clearInterval(cdInterval); cdInterval=null;}
+  };
+  update();
+  cdInterval = setInterval(update, 1000);
+}
+
+window.addEventListener('hashchange', ()=>{router(); window.scrollTo(0,0)});
+
+// ============ ASYNC INIT ============
+async function init(){
+  updateHeader();
+
+  // Session шалгах (хурдан, products-аас өмнө)
+  if(db){
+    await refreshSession();
+    // Auth өөрчлөгдөхөд header болон одоогийн хуудсыг шинэчлэх
+    db.auth.onAuthStateChange((_evt, session) => {
+      currentUser = session?.user || null;
+      if(location.hash === '#/account') router();
+    });
+  }
+
+  updateHeader();
+  router(); // эхлээд анхдагч өгөгдлөөр шууд харуулах (хурдан UX)
+
+  if(db){
+    const ok = await loadProductsFromSupabase();
+    if(ok){
+      router(); // database-аас орж ирсэн шинэ өгөгдлөөр дахин зурах
+    } else {
+      console.warn('Supabase холбогдсон ч өгөгдөл хоосон байна. Console-д "seedProductsToSupabase()" гэж бичээд 42 анхны бүтээгдэхүүнийг нэмнэ үү.');
+      // Доор баруун буланд seed товч харуулах
+      const seedBtn = document.createElement('button');
+      seedBtn.textContent = '🌱 Анхны 42 бүтээгдэхүүнийг Supabase-д оруулах';
+      seedBtn.style.cssText = 'position:fixed;bottom:20px;left:20px;z-index:9999;padding:14px 20px;background:var(--primary);color:#000;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-family:JetBrains Mono,monospace;font-size:12px;letter-spacing:1px;box-shadow:0 10px 30px rgba(0,0,0,.4)';
+      seedBtn.onclick = ()=>{seedBtn.remove(); seedProductsToSupabase();};
+      document.body.appendChild(seedBtn);
+    }
+  } else {
+    console.info('⚠️ Supabase холбогдоогүй. blackmarket.html файлын SUPABASE_URL болон SUPABASE_KEY-г засаарай.');
+  }
+}
+
+if(document.readyState === 'loading'){
+  window.addEventListener('DOMContentLoaded', init);
+}else{
+  init();
+}
+</script>
+</body>
+</html>
