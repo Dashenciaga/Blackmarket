@@ -901,6 +901,8 @@ main{min-height:60vh}
   .cart-item-price::before{content:"Үнэ: "}
   .icon-btn{width:38px;height:38px}
   .icon-btn:nth-child(2){display:none}
+  #auth-btn #auth-btn-label{display:none}
+  #auth-btn{width:38px;height:38px;padding:0;justify-content:center}
   .cart-btn{padding:0 12px;height:38px;gap:6px}
   .cart-btn .cart-label{display:none}
   .topstrip{font-size:10px}
@@ -949,8 +951,9 @@ main{min-height:60vh}
         <svg class="theme-icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         <svg class="theme-icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
       </button>
-      <button class="icon-btn" onclick="app.go('#/account')" title="Профайл">
-        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <button id="auth-btn" class="btn btn-outline" onclick="app.go('#/account')" style="height:44px;padding:0 16px;font-size:12px;display:flex;align-items:center;gap:8px">
+        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span id="auth-btn-label">Нэвтрэх</span>
       </button>
       <button class="icon-btn" onclick="app.go('#/wishlist')" title="Хадгалсан">
         <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
@@ -979,6 +982,7 @@ main{min-height:60vh}
       <li><a href="#/category/laptop">Зөөврийн</a></li>
       <li><a href="#/category/ps5">PlayStation</a></li>
       <li><a href="#/category/setup">Бэлэн сэтап</a></li>
+      <li id="nav-auth-li"><a href="#/account" id="nav-auth-link">Нэвтрэх</a></li>
     </ul>
     <span class="nav-hot">DROP 03 LIVE</span>
   </div>
@@ -1398,12 +1402,28 @@ function updateHeader(){
   $('#wishlist-count').textContent = wcount;
   $('#wishlist-count').style.display = wcount ? 'grid' : 'none';
 
-  // Profile товч — нэвтэрсэн бол үнэлгээ
-  const accountBtn = document.querySelector('.icon-btn[title="Профайл"]');
-  if(accountBtn){
-    accountBtn.title = currentUser ? ('Профайл · ' + currentUser.email) : 'Нэвтрэх / Бүртгүүлэх';
-    accountBtn.style.borderColor = currentUser ? 'var(--primary)' : '';
-    accountBtn.style.color = currentUser ? 'var(--primary)' : '';
+  // Auth товч — нэвтэрсэн/гараагүй төлөвт
+  const authBtn = document.getElementById('auth-btn');
+  const authLabel = document.getElementById('auth-btn-label');
+  if(authBtn && authLabel){
+    if(currentUser){
+      const meta = currentUser.user_metadata || {};
+      const name = meta.full_name || currentUser.email || '';
+      const initials = name.trim()[0]?.toUpperCase() || '?';
+      authBtn.title = 'Профайл · ' + currentUser.email;
+      authBtn.style.borderColor = 'var(--primary)';
+      authBtn.style.color = 'var(--primary)';
+      authLabel.textContent = initials + ' ' + (meta.full_name ? meta.full_name.split(' ')[0] : currentUser.email.split('@')[0]);
+    } else {
+      authBtn.title = 'Нэвтрэх / Бүртгүүлэх';
+      authBtn.style.borderColor = '';
+      authBtn.style.color = '';
+      authLabel.textContent = 'Нэвтрэх';
+    }
+  }
+  const navAuthLink = document.getElementById('nav-auth-link');
+  if(navAuthLink){
+    navAuthLink.textContent = currentUser ? 'Профайл' : 'Нэвтрэх';
   }
 }
 
